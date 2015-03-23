@@ -2,7 +2,7 @@
 //  CTPlatformDevice.h
 //  ProtoRegi02
 //
-//  Created by TAKEMOTO KOUHEIon 11/12/16.
+//  Created by TAKEMOTO KOUHEI on 11/12/16.
 //  Copyright (c) 2011 citrus.tk. All rights reserved.
 //
 

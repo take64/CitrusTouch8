@@ -2,7 +2,7 @@
 //  CTDecimal.m
 //  CitrusTouch
 //
-//  Created by TAKEMOTO KOUHEIon 12/01/20.
+//  Created by TAKEMOTO KOUHEI on 12/01/20.
 //  Copyright (c) 2012 citrus.tk. All rights reserved.
 //
 

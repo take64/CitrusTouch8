@@ -2,7 +2,7 @@
 //  CTTableCellSegmentedControl.m
 //  ProtoRegi02
 //
-//  Created by TAKEMOTO KOUHEIon 11/12/21.
+//  Created by TAKEMOTO KOUHEI on 11/12/21.
 //  Copyright (c) 2011 citrus.tk. All rights reserved.
 //
 

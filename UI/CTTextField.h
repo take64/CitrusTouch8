@@ -2,7 +2,7 @@
 //  CTTextField.h
 //  CitrusTouch
 //
-//  Created by TAKEMOTO KOUHEIon 11/12/07.
+//  Created by TAKEMOTO KOUHEI on 11/12/07.
 //  Copyright (c) 2011 citrus.tk. All rights reserved.
 //
 
