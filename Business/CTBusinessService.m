@@ -10,14 +10,12 @@
 
 #import "CTString.h"
 
-#import <AdSupport/AdSupport.h>
-
 @implementation CTBusinessService
 
 // entity用ユニークID
 + (NSString *) uniqueID
 {
-    NSString *half01 = [CTString md5FromString:[[[ASIdentifierManager sharedManager] advertisingIdentifier] UUIDString]];
+    NSString *half01 = [CTString md5FromString:[NSString stringWithFormat:@"%d", rand()]];
     NSString *half02 = [CTString md5FromString:[NSString stringWithFormat:@"%f", [[NSDate date] timeIntervalSince1970]]];
     NSString *generateID = [NSString stringWithFormat:@"%@%@", half01, half02];
     return generateID;
