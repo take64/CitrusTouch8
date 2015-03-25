@@ -14,6 +14,7 @@
 // synthesize
 //
 @synthesize enableMenu;
+@synthesize toolbar;
 
 
 
@@ -25,6 +26,17 @@
     {
         // メニュー表示ON
         [self setEnableMenu:YES];
+        
+        // ツールバー
+        [self setToolbar:[[UIToolbar alloc] initWithFrame:CGRectMake(0, 0, 320, 44)]];
+        [[self toolbar] setBarStyle:UIBarStyleBlackOpaque];
+        [[self toolbar] setTranslucent:YES];
+        
+        // ツールバーパーツ
+        UIBarButtonItem *barSpacer = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil];
+        UIBarButtonItem *barButtonDone = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector(onTapBarButtonDone)];
+        [barButtonDone setTintColor:[UIColor whiteColor]];
+        [[self toolbar] setItems:@[ barSpacer, barButtonDone ]];
     }
     return self;
 }
@@ -37,6 +49,14 @@
         [self resignFirstResponder];
     }
     return [super canPerformAction:action withSender:sender];
+}
+
+- (void)onTapBarButtonDone
+{
+    if([self canResignFirstResponder] == YES)
+    {
+        [self resignFirstResponder];
+    }
 }
 
 @end

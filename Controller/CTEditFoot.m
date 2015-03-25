@@ -39,7 +39,7 @@
         [[[self removeButton] callStyle] addStyleDictionary:@{
          @"top"             :@"0",
          @"left"            :@"0",
-         @"width"           :@"704",
+         @"width"           :@"320",
          @"height"          :@"64",
          @"font-size"       :@"20",
          @"font-weight"     :@"bold",
@@ -66,7 +66,7 @@
         [[[self rebirthButton] callStyle] addStyleDictionary:@{
          @"top"             :@"64",
          @"left"            :@"0",
-         @"width"           :@"704",
+         @"width"           :@"320",
          @"height"          :@"64",
          @"font-size"       :@"20",
          @"font-weight"     :@"bold",

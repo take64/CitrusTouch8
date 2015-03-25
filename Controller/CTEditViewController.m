@@ -22,6 +22,7 @@
 @synthesize rowOfSection;
 @synthesize datastore;
 @synthesize temporary;
+@synthesize relations;
 @synthesize editFoot;
 @synthesize editable;
 @synthesize removeAlertView;
@@ -41,8 +42,8 @@
         // データストア生成
         [self setHeadTitles:[NSArray array]];
         [self setRowOfSection:[NSArray array]];
-        [self setDatastore:[NSMutableDictionary dictionaryWithCapacity:1]];
-        [self setTemporary:[NSMutableDictionary dictionaryWithCapacity:1]];
+        [self setDatastore:[NSMutableDictionary dictionary]];
+        [self setTemporary:[NSMutableDictionary dictionary]];
         
         // 削除可能
         [self setEditable:YES];
@@ -135,7 +136,11 @@
 {
     return [[self rowOfSection] count];
 }
-//- (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section;
+// ヘッダタイトル
+- (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section
+{
+    return [[self headTitles] objectAtIndex:section];
+}
 //- (NSString *)tableView:(UITableView *)tableView titleForFooterInSection:(NSInteger)section;
 //- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath;
 //- (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath;
@@ -234,8 +239,12 @@
 - (void) loadEntity:(NSManagedObject *)entityValue
 {
     [self setEntity:entityValue];
-    [self setTemporary:[NSMutableDictionary dictionaryWithCapacity:1]];
-    [self setDatastore:[NSMutableDictionary dictionaryWithCapacity:1]];
+    [self setTemporary:[NSMutableDictionary dictionary]];
+    [self setDatastore:[NSMutableDictionary dictionary]];
+}
+// 保存
+- (void) save
+{
 }
 // 削除
 - (void) remove
@@ -259,6 +268,10 @@
 // ボタン押下時(保存)
 - (void) onTapBarButtonSave
 {
+    if([self canPerformAction:@selector(save) withSender:nil] == YES)
+    {
+        [self performSelector:@selector(save) withObject:nil];
+    }
 }
 // ボタン押下時(削除)
 - (void) onTapButtonRemove

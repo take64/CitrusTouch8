@@ -12,11 +12,15 @@
 {
     // メニュー表示
     BOOL enableMenu;
+    
+    // ツールバー
+    UIToolbar *toolbar;
 }
 
 //
 // property
 //
-@property (nonatomic) BOOL enableMenu;
+@property (nonatomic, assign) BOOL enableMenu;
+@property (nonatomic, retain) UIToolbar *toolbar;
 
 @end

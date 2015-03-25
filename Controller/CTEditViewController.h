@@ -21,6 +21,7 @@
     
     NSMutableDictionary *datastore; // データストア
     NSMutableDictionary *temporary; // テンポラリ
+    NSMutableDictionary *relations; // リレーション
     
     
     CTEditFoot *editFoot;           // 編集パネル
@@ -41,6 +42,7 @@
 @property (nonatomic, retain) NSArray *rowOfSection;
 @property (nonatomic, retain) NSMutableDictionary *datastore;
 @property (nonatomic, retain) NSMutableDictionary *temporary;
+@property (nonatomic, retain) NSMutableDictionary *relations;
 @property (nonatomic, retain) CTEditFoot *editFoot;
 @property (nonatomic, assign) BOOL editable;
 @property (nonatomic, retain) UIAlertView *removeAlertView;
