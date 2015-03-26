@@ -37,6 +37,7 @@
 #import "CTSelectModal.h"
 #import "CTSelectEntityModal.h"
 #import "CTSelectKeyModal.h"
+#import "CTSelectColorModal.h"
 //
 #import "CTSplitViewController.h"
 //#import "CTRefreshTableViewController.h"

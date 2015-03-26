@@ -25,8 +25,8 @@
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
-        [self setKeyDict:[NSMutableDictionary dictionaryWithCapacity:1]];
-        [self setKeyList:[NSMutableArray arrayWithCapacity:1]];
+        [self setKeyDict:[NSMutableDictionary dictionary]];
+        [self setKeyList:[NSMutableArray array]];
     }
     return self;
 }
