@@ -16,4 +16,10 @@
 // 16進数カラー からCTColor(UIColor) オブジェクトを取得(透過色付き)
 + (CTColor *) colorWithHEXString:(NSString *)hexString alpha:(CGFloat)alpha;
 
+// 16進数カラー から補色CTColor(UIColor) オブジェクトを取得
++ (CTColor *) complementaryColorWithHEXString:(NSString *)hexString;
+
+// CTColor(UIColor) から 16進数文字列を取得
++ (NSString *) hexStringWithColor:(CTColor *)colorValue;
+
 @end
