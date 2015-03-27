@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
-#import "GADBannerView.h"
+#import <GoogleMobileAds/GoogleMobileAds.h>
 
 @interface CTAdMobService : NSObject
 {

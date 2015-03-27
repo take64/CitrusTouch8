@@ -46,6 +46,7 @@
 #import "CTTableCellImage.h"
 #import "CTTableCellNumberPad.h"
 #import "CTTableCellButtonTextField.h"
+#import "CTTableCellSlider.h"
 // table cell inner
 #import "CTTableCellTextFieldInnerTextField.h"
 
