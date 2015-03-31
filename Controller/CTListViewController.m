@@ -36,8 +36,14 @@
 {
     [super viewWillAppear:animated];
     
-    // 戻る
-//    [[[self navigationController] navigationBar] setTintColor:[UIColor whiteColor]];
+    [[self callFetchedResultsController] setDelegate:self];
+    [[self callFetchedResultsController] performFetch:nil];
+}
+- (void)viewDidAppear:(BOOL)animated
+{
+    [super viewDidAppear:animated];
+    
+    [[self callFetchedResultsController] setDelegate:nil];
 }
 - (void)viewDidLoad
 {
@@ -48,8 +54,7 @@
     [super didReceiveMemoryWarning];
 }
 
-#pragma mark -
-#pragma mark UITableViewDataSource
+#pragma mark - UITableViewDataSource
 //
 // UITableViewDataSource
 //
@@ -82,8 +87,7 @@
 //- (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)sourceIndexPath toIndexPath:(NSIndexPath *)destinationIndexPath;
 
 
-#pragma mark -
-#pragma mark UITableViewDelegate
+#pragma mark - UITableViewDelegate
 //
 // UITableViewDelegate
 //
