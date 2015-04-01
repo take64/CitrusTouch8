@@ -31,6 +31,23 @@
 {
     [super viewDidLoad];
 }
+- (void) viewDidAppear:(BOOL)animated
+{
+    [super viewDidAppear:animated];
+    
+    // フェッチ
+    [[self callFetchedResultsController] setDelegate:self];
+    [[self callFetchedResultsController] performFetch:nil];
+    
+    [[self _tableView] reloadData];
+}
+- (void) viewWillDisappear:(BOOL)animated
+{
+    [super viewWillDisappear:animated];
+    
+    // フェッチ
+    [[self callFetchedResultsController] setDelegate:nil];
+}
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
@@ -39,8 +56,7 @@
 
 
 
-#pragma mark -
-#pragma mark UITableViewDataSource method
+#pragma mark - UITableViewDataSource method
 //
 // UITableViewDataSource method
 //
@@ -153,8 +169,7 @@
 
 
 
-#pragma mark -
-#pragma mark singleton
+#pragma mark - singleton
 //
 // singleton
 //

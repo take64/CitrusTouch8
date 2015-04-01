@@ -53,7 +53,7 @@
         [[[self label] callStyle] addStyleDictionary:@{
                                                        @"font-size" :@"16",
                                                        @"color"     :@"000000",
-                                                       @"text-align":@"right",
+                                                       @"text-align":@"left",
                                                        @"line-break":@"clipping",
                                                        }];
         [[self label] setAutoresizingMask:(UIViewAutoresizingFlexibleLeftMargin |
