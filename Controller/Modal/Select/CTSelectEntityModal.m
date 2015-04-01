@@ -71,7 +71,10 @@
     return 0;
 }
 //- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath;
-//- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView;
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
+{
+    return [[[self callFetchedResultsController] sections] count];
+}
 //- (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section;
 //- (NSString *)tableView:(UITableView *)tableView titleForFooterInSection:(NSInteger)section;
 //- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath;
