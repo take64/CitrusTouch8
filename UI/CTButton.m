@@ -1,6 +1,6 @@
 //
 //  CTButton.m
-//  Panel15
+//  CitrusTouch
 //
 //  Created by TAKEMOTO KOUHEI on 2012/10/02.
 //  Copyright (c) 2012年 citrus.tk. All rights reserved.
