@@ -1,6 +1,6 @@
 //
 //  CTEditViewController.m
-//  LorsPOS2
+//  CitrusTouch
 //
 //  Created by TAKEMOTO KOUHEI on 2013/12/21.
 //  Copyright (c) 2013年 naissance sapporo co,.Ltd. All rights reserved.

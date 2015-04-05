@@ -1,6 +1,6 @@
 //
 //  CTSound.m
-//  LorsPOS2
+//  CitrusTouch
 //
 //  Created by Take on 13/12/12.
 //  Copyright (c) 2013年 naissance sapporo co,.Ltd. All rights reserved.
