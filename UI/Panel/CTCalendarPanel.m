@@ -34,7 +34,7 @@
     [components setMonth:[monthNumber integerValue]];
     [components setDay:1];
     
-    NSCalendar *calendar = [[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar];
+    NSCalendar *calendar = [[NSCalendar alloc] initWithCalendarIdentifier:NSCalendarIdentifierGregorian];
     
     // 対象日付
     NSDate *firstDate = [calendar dateFromComponents:components];
@@ -51,11 +51,11 @@
     
     
     // 月 最終日取得
-    NSRange range = [calendar rangeOfUnit:NSDayCalendarUnit inUnit:NSMonthCalendarUnit forDate:firstDate];
+    NSRange range = [calendar rangeOfUnit:NSCalendarUnitDay inUnit:NSCalendarUnitMonth forDate:firstDate];
     monthLastDay = range.length;
     
     // 月初めの曜日、月終わりの曜日
-    NSUInteger weekday = [[calendar components:NSWeekdayCalendarUnit fromDate:firstDate] weekday] - 1;
+    NSUInteger weekday = [[calendar components:NSCalendarUnitWeekday fromDate:firstDate] weekday] - 1;
     monthFirstWeekday = weekday;
     monthLastWeekday = (monthFirstWeekday + monthLastDay) % 7;
     

@@ -217,7 +217,7 @@
         [self setHeadTitles:[NSMutableArray arrayWithCapacity:1]];
         
         // 閉じるボタン
-        UIBarButtonItem *buttonClose = [[UIBarButtonItem alloc] initWithTitle:@"閉じる" style:UIBarButtonItemStyleBordered target:self action:@selector(hide)];
+        UIBarButtonItem *buttonClose = [[UIBarButtonItem alloc] initWithTitle:@"閉じる" style:UIBarButtonItemStylePlain target:self action:@selector(hide)];
         [[[self _tableViewController] navigationItem] setLeftBarButtonItem:buttonClose];
         
         // 保存ボタン

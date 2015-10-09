@@ -87,7 +87,7 @@
         UIBarButtonItem *buttonSpacer = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil];
         
         // 閉じるボタン
-        UIBarButtonItem *buttonClose = [[UIBarButtonItem alloc] initWithTitle:@"閉じる" style:UIBarButtonItemStyleBordered target:self action:@selector(hide)];
+        UIBarButtonItem *buttonClose = [[UIBarButtonItem alloc] initWithTitle:@"閉じる" style:UIBarButtonItemStylePlain target:self action:@selector(hide)];
         [buttonClose setTintColor:[UIColor whiteColor]];
         [[self _viewController] setToolbarItems:@[ buttonSpacer, buttonClose ]];
         [self setToolbarHidden:NO];

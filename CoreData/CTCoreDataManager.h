@@ -70,6 +70,8 @@
 - (BOOL) saveContext;
 // 保存&マージ
 - (void) saveWithMergeObject:(NSManagedObject *)managedObject;
+// 保存＆mainThread保存
+- (void) saveComplete;
 // 削除
 - (BOOL) deleteWithSave:(NSManagedObject *)managedObject;
 // ロールバック

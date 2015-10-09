@@ -147,7 +147,7 @@
         [[[self _tableViewController] navigationItem] setRightBarButtonItem:buttonSelect];
         
         // 閉じるボタン
-        UIBarButtonItem *buttonClose = [[UIBarButtonItem alloc] initWithTitle:@"閉じる" style:UIBarButtonItemStyleBordered target:self action:@selector(hide)];
+        UIBarButtonItem *buttonClose = [[UIBarButtonItem alloc] initWithTitle:@"閉じる" style:UIBarButtonItemStylePlain target:self action:@selector(hide)];
         [[[self _tableViewController] navigationItem] setLeftBarButtonItem:buttonClose];
     }
     return self;

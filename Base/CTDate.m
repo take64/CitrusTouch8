@@ -113,11 +113,11 @@
     static NSCalendar *calendar;
     if(calendar == nil)
     {
-        calendar = [[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar];
+        calendar = [[NSCalendar alloc] initWithCalendarIdentifier:NSCalendarIdentifierGregorian];
         [calendar setLocale:localeValue];
         [calendar setTimeZone:timeZoneValue];
     }
-    NSDateComponents *components = [calendar components:(NSYearCalendarUnit | NSMonthCalendarUnit | NSDayCalendarUnit | NSHourCalendarUnit | NSMinuteCalendarUnit | NSSecondCalendarUnit | NSWeekdayCalendarUnit) fromDate:dateValue];
+    NSDateComponents *components = [calendar components:(NSCalendarUnitYear | NSCalendarUnitMonth | NSCalendarUnitDay | NSCalendarUnitHour | NSCalendarUnitMinute | NSCalendarUnitSecond | NSCalendarUnitWeekday) fromDate:dateValue];
     [components setHour:0];
     [components setMinute:0];
     [components setSecond:0];
@@ -131,11 +131,11 @@
     static NSCalendar *calendar;
     if(calendar == nil)
     {
-        calendar = [[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar];
+        calendar = [[NSCalendar alloc] initWithCalendarIdentifier:NSCalendarIdentifierGregorian];
         [calendar setLocale:[[NSLocale alloc] initWithLocaleIdentifier:@"ja_JP"]];
         [calendar setTimeZone:[NSTimeZone systemTimeZone]];
     }
-    NSDateComponents *components = [calendar components:(NSYearCalendarUnit | NSMonthCalendarUnit | NSDayCalendarUnit | NSHourCalendarUnit | NSMinuteCalendarUnit | NSSecondCalendarUnit | NSWeekdayCalendarUnit) fromDate:[NSDate date]];
+    NSDateComponents *components = [calendar components:(NSCalendarUnitYear | NSCalendarUnitMonth | NSCalendarUnitDay | NSCalendarUnitHour | NSCalendarUnitMinute | NSCalendarUnitSecond | NSCalendarUnitWeekday) fromDate:[NSDate date]];
     [components setHour:0];
     [components setMinute:0];
     [components setSecond:0];
@@ -149,11 +149,11 @@
     static NSCalendar *calendar;
     if(calendar == nil)
     {
-        calendar = [[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar];
+        calendar = [[NSCalendar alloc] initWithCalendarIdentifier:NSCalendarIdentifierGregorian];
         [calendar setLocale:[[NSLocale alloc] initWithLocaleIdentifier:@"ja_JP"]];
         [calendar setTimeZone:[NSTimeZone systemTimeZone]];
     }
-    NSDateComponents *components = [calendar components:(NSYearCalendarUnit | NSMonthCalendarUnit | NSDayCalendarUnit | NSHourCalendarUnit | NSMinuteCalendarUnit | NSSecondCalendarUnit | NSWeekdayCalendarUnit) fromDate:dateValue];
+    NSDateComponents *components = [calendar components:(NSCalendarUnitYear | NSCalendarUnitMonth | NSCalendarUnitDay | NSCalendarUnitHour | NSCalendarUnitMinute | NSCalendarUnitSecond | NSCalendarUnitWeekday) fromDate:dateValue];
     
     return [components year];
 }
@@ -164,11 +164,11 @@
     static NSCalendar *calendar;
     if(calendar == nil)
     {
-        calendar = [[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar];
+        calendar = [[NSCalendar alloc] initWithCalendarIdentifier:NSCalendarIdentifierGregorian];
         [calendar setLocale:[[NSLocale alloc] initWithLocaleIdentifier:@"ja_JP"]];
         [calendar setTimeZone:[NSTimeZone systemTimeZone]];
     }
-    NSDateComponents *components = [calendar components:(NSYearCalendarUnit | NSMonthCalendarUnit | NSDayCalendarUnit | NSHourCalendarUnit | NSMinuteCalendarUnit | NSSecondCalendarUnit | NSWeekdayCalendarUnit) fromDate:dateValue];
+    NSDateComponents *components = [calendar components:(NSCalendarUnitYear | NSCalendarUnitMonth | NSCalendarUnitDay | NSCalendarUnitHour | NSCalendarUnitMinute | NSCalendarUnitSecond | NSCalendarUnitWeekday) fromDate:dateValue];
     
     return [components month];
 }
@@ -179,11 +179,11 @@
     static NSCalendar *calendar;
     if(calendar == nil)
     {
-        calendar = [[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar];
+        calendar = [[NSCalendar alloc] initWithCalendarIdentifier:NSCalendarIdentifierGregorian];
         [calendar setLocale:[[NSLocale alloc] initWithLocaleIdentifier:@"ja_JP"]];
         [calendar setTimeZone:[NSTimeZone systemTimeZone]];
     }
-    NSDateComponents *components = [calendar components:(NSYearCalendarUnit | NSMonthCalendarUnit | NSDayCalendarUnit | NSHourCalendarUnit | NSMinuteCalendarUnit | NSSecondCalendarUnit | NSWeekdayCalendarUnit) fromDate:dateValue];
+    NSDateComponents *components = [calendar components:(NSCalendarUnitYear | NSCalendarUnitMonth | NSCalendarUnitDay | NSCalendarUnitHour | NSCalendarUnitMinute | NSCalendarUnitSecond | NSCalendarUnitWeekday) fromDate:dateValue];
     
     return [components day];
 }
@@ -194,11 +194,11 @@
     static NSCalendar *calendar;
     if(calendar == nil)
     {
-        calendar = [[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar];
+        calendar = [[NSCalendar alloc] initWithCalendarIdentifier:NSCalendarIdentifierGregorian];
         [calendar setLocale:[[NSLocale alloc] initWithLocaleIdentifier:@"ja_JP"]];
         [calendar setTimeZone:[NSTimeZone systemTimeZone]];
     }
-    NSDateComponents *components = [calendar components:(NSYearCalendarUnit | NSMonthCalendarUnit | NSDayCalendarUnit | NSHourCalendarUnit | NSMinuteCalendarUnit | NSSecondCalendarUnit | NSWeekdayCalendarUnit) fromDate:dateValue];
+    NSDateComponents *components = [calendar components:(NSCalendarUnitYear | NSCalendarUnitMonth | NSCalendarUnitDay | NSCalendarUnitHour | NSCalendarUnitMinute | NSCalendarUnitSecond | NSCalendarUnitWeekday) fromDate:dateValue];
     [components setDay:1];
     [components setHour:0];
     [components setMinute:0];

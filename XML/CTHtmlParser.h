@@ -7,7 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
-#import <libxml/HTMLparser.h>
+#import <libxml2/libxml/HTMLparser.h>
 
 @class CTHtmlNode;
 //typedef void (^CTHtmlParserBlock)(NSDictionary *userInfo);

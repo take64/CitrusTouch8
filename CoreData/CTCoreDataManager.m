@@ -172,6 +172,16 @@ static const NSString *NSManagedObjectContextThreadKey = @"NSManagedObjectContex
     // 保存
     return [self saveContext];
 }
+// 保存＆mainThread保存
+- (void) saveComplete
+{
+    [self saveContext];
+    
+    dispatch_async(dispatch_get_main_queue(), ^{
+        
+        [self saveContext];
+    });
+}
 // ロールバック
 - (void) rollbackContext
 {
