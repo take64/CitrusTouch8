@@ -1,6 +1,6 @@
 //
 //  CTPopupDialog.m
-//  FriendConnection
+//  CitrusTouch
 //
 //  Created by TAKEMOTO KOUHEI on 2014/03/15.
 //  Copyright (c) 2014年 citrus.tk. All rights reserved.
@@ -17,43 +17,21 @@
 @synthesize contentArea;
 @synthesize _parentView;
 @synthesize successBlock;
-@synthesize cancelBlock;
+@synthesize failureBlock;
 @synthesize successButton;
-@synthesize cancelButton;
+@synthesize failureButton;
 
 // 初期化
 - (id)initWithFrame:(CGRect)frame
 {
-    self = [super initWithFrame:frame];
+    AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
+    self = [super initWithFrame:[[appDelegate window] frame]];
     if (self)
     {
         // 背景
         [self setBackgroundColor:[CTColor colorWithHEXString:@"3333337F"]];
         
-    }
-    return self;
-}
-// 初期化
-- (id)initWithParentView:(UIView *)parentView
-{
-    self = [self initWithParentView:parentView frame:CGRectInset([parentView frame], 8, 16)];
-//    self = [self initWithParentView:parentView frame:[parentView frame]];
-    if(self)
-    {
-        
-    }
-    return self;
-}
-
-// 初期化
-- (id)initWithParentView:(UIView *)parentView frame:(CGRect)frameRect
-{
-    self = [self initWithFrame:[parentView frame]];
-    if(self)
-    {
-        [self set_parentView:parentView];
-        
-        CGRect insetFrame = frameRect;
+        CGRect insetFrame = frame;
         
         // コンテンツエリア
         [self setContentArea:CGRectMake(CL8(1), CL8(1), (insetFrame.size.width - CL8(2)), (insetFrame.size.height - CL8(9)))];
@@ -94,40 +72,31 @@
         [[[self successButton] callStyleHighlighted] addStyleDictionary:@{
                                                                           @"background-image":@"linear-gradient(rgba(0.10, 0.10, 0.10, 0.90) 0.00, rgba(0.10, 0.10, 0.10, 0.50) 0.05, rgba(0.10, 0.10, 0.10, 0.50) 0.95, rgba(0.10, 0.10, 0.10, 0.90) 1.00)",
                                                                           }];
-        [[self successButton] setOnTappedComplete:^(CTButton *buttonValue) {
-            if([self successBlock] != nil)
-            {
-                self.successBlock(self, nil);
-            }
-            [self hide];
-        }];
+        [[self successButton] addTarget:self action:@selector(onTapButtonSuccess) forControlEvents:UIControlEventTouchUpInside];
         [[self contentView] addSubview:[self successButton]];
         
         // ボタン(キャンセル)
-        [self setCancelButton:[[CTButton alloc] initWithText:@"キャンセル"]];
-        [[self cancelButton] setStyle:buttonStyle];
-        [[[self cancelButton] callStyle] addStyleDictionary:@{
-                                                              @"left"            :@"150",
-                                                              @"background-color":@"FF0000",
+        [self setFailureButton:[[CTButton alloc] initWithText:@"キャンセル"]];
+        [[self failureButton] setStyle:buttonStyle];
+        [[[self failureButton] callStyle] addStyleDictionary:@{
+                                                               @"left"            :@"150",
+                                                               @"background-color":@"FF0000",
                                                               }];
-        [[[self cancelButton] callStyleHighlighted] addStyleDictionary:@{
-                                                                         @"background-image":@"linear-gradient(rgba(0.10, 0.10, 0.10, 0.90) 0.00, rgba(0.10, 0.10, 0.10, 0.50) 0.05, rgba(0.10, 0.10, 0.10, 0.50) 0.95, rgba(0.10, 0.10, 0.10, 0.90) 1.00)",
+        [[[self failureButton] callStyleHighlighted] addStyleDictionary:@{
+                                                                          @"background-image":@"linear-gradient(rgba(0.10, 0.10, 0.10, 0.90) 0.00, rgba(0.10, 0.10, 0.10, 0.50) 0.05, rgba(0.10, 0.10, 0.10, 0.50) 0.95, rgba(0.10, 0.10, 0.10, 0.90) 1.00)",
                                                                          }];
-        [[self cancelButton] setOnTappedComplete:^(CTButton *buttonValue) {
-            if([self cancelBlock] != nil)
-            {
-                self.cancelBlock(self, nil);
-            }
-            [self hide];
-        }];
-        [[self contentView] addSubview:[self cancelButton]];
+        
+        [[self failureButton] addTarget:self action:@selector(onTapButtonFailure) forControlEvents:UIControlEventTouchUpInside];
+        [[self contentView] addSubview:[self failureButton]];
     }
     return self;
 }
 
 // 表示
-- (void)show
+- (void)showWithParentView:(UIView *)parentView
 {
+    [self set_parentView:parentView];
+    
     [[self _parentView] addSubview:self];
 }
 
@@ -135,6 +104,28 @@
 - (void)hide
 {
     [self removeFromSuperview];
+}
+
+// ボタン押下時(OK)
+- (void)onTapButtonSuccess
+{
+    if(self.successBlock != nil)
+    {
+        self.successBlock();
+    }
+    
+    [self hide];
+}
+
+// ボタン押下時(NG)
+- (void)onTapButtonFailure
+{
+    if(self.failureBlock != nil)
+    {
+        self.failureBlock();
+    }
+    
+    [self hide];
 }
 
 @end

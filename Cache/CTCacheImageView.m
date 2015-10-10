@@ -1,6 +1,6 @@
 //
 //  CTCacheImageView.m
-//  FriendConnection
+//  CitrusTouch
 //
 //  Created by TAKEMOTO KOUHEI on 2014/03/14.
 //  Copyright (c) 2014年 citrus.tk. All rights reserved.

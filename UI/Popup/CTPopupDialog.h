@@ -1,6 +1,6 @@
 //
 //  CTPopupDialog.h
-//  FriendConnection
+//  CitrusTouch
 //
 //  Created by TAKEMOTO KOUHEI on 2014/03/15.
 //  Copyright (c) 2014年 citrus.tk. All rights reserved.
@@ -16,11 +16,11 @@
     
     UIView *_parentView;
     
-    CitrusTouchCompleteBlock successBlock;
-    CitrusTouchCompleteBlock cancelBlock;
+    CitrusTouchBlock successBlock;
+    CitrusTouchBlock failureBlock;
     
     CTButton *successButton;
-    CTButton *cancelButton;
+    CTButton *failureButton;
     
 }
 
@@ -30,25 +30,27 @@
 @property (nonatomic, retain) CTControl *contentView;
 @property (nonatomic, assign) CGRect contentArea;
 @property (nonatomic, retain) UIView *_parentView;
-@property (nonatomic, copy  ) CitrusTouchCompleteBlock successBlock;
-@property (nonatomic, copy  ) CitrusTouchCompleteBlock cancelBlock;
+@property (nonatomic, copy  ) CitrusTouchBlock successBlock;
+@property (nonatomic, copy  ) CitrusTouchBlock failureBlock;
 @property (nonatomic, retain) CTButton *successButton;
-@property (nonatomic, retain) CTButton *cancelButton;
+@property (nonatomic, retain) CTButton *failureButton;
 
 //
 // method
 //
 
 // 初期化
-- (id)initWithParentView:(UIView *)parentView;
-
-// 初期化
-- (id)initWithParentView:(UIView *)parentView frame:(CGRect)frameRect;
+- (id)initWithFrame:(CGRect)frame;
 
 // 表示
-- (void)show;
+- (void)showWithParentView:(UIView *)parentView;
 
 // 非表示
 - (void)hide;
 
+// ボタン押下時(OK)
+- (void)onTapButtonSuccess;
+
+// ボタン押下時(NG)
+- (void)onTapButtonFailure;
 @end
