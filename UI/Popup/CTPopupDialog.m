@@ -14,7 +14,9 @@
 // synthesize
 //
 @synthesize contentView;
-@synthesize contentArea;
+@synthesize contentFrame;
+@synthesize innerFrame;
+@synthesize titleLabel;
 @synthesize _parentView;
 @synthesize successBlock;
 @synthesize failureBlock;
@@ -25,7 +27,7 @@
 - (id)initWithFrame:(CGRect)frame
 {
     AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
-    self = [super initWithFrame:[[appDelegate window] frame]];
+    self = [super initWithFrame:[[appDelegate window] bounds]];
     if (self)
     {
         // 背景
@@ -34,7 +36,7 @@
         CGRect insetFrame = frame;
         
         // コンテンツエリア
-        [self setContentArea:CGRectMake(CL8(1), CL8(1), (insetFrame.size.width - CL8(2)), (insetFrame.size.height - CL8(9)))];
+        [self setContentFrame:insetFrame];
         
         [self setContentView:[[CTControl alloc] initWithFrame:insetFrame]];
         [[[self contentView] callStyle] addStyleDictionary:@{
@@ -46,7 +48,24 @@
                                                              }];
         [self addSubview:[self contentView]];
         
+        // 内部エリア
+        [self setInnerFrame:CGRectMake((4 + 4), (4 + 24), (insetFrame.size.width - (4 + 4 + 4 + 4)), (insetFrame.size.height - (4 + 4 + 24 + 60)))];
         
+        // タイトル
+        [self setTitleLabel:[[CTLabel alloc] initWithText:@""]];
+        [[[self titleLabel] callStyle] addStyleDictionary:@{
+                                                            @"top"              :@"4",
+                                                            @"left"             :@"4",
+                                                            @"width"            :[@(insetFrame.size.width - (4 + 4)) stringValue],
+                                                            @"height"           :@"24",
+                                                            @"font-size"        :@"20",
+                                                            @"font-weight"      :@"bold",
+                                                            @"color"            :@"FFFFFFFF",
+//                                                            @"background-color" :@"FF0000FF",
+                                                            }];
+        [[self contentView] addSubview:[self titleLabel]];
+        
+        // ボタンスタイル
         CTStyle *buttonStyle = [[CTStyle alloc] initWithStyleDictionary:@{
                                                                           @"top"             :[@(insetFrame.size.height - 64) stringValue],
                                                                           @"width"           :@"152",
@@ -66,7 +85,7 @@
         [self setSuccessButton:[[CTButton alloc] initWithText:@"OK"]];
         [[self successButton] setStyle:buttonStyle];
         [[[self successButton] callStyle] addStyleDictionary:@{
-                                                               @"left"            :@"2",
+                                                               @"left"            :@"150",
                                                                @"background-color":@"0000FF",
                                                                }];
         [[[self successButton] callStyleHighlighted] addStyleDictionary:@{
@@ -79,7 +98,7 @@
         [self setFailureButton:[[CTButton alloc] initWithText:@"キャンセル"]];
         [[self failureButton] setStyle:buttonStyle];
         [[[self failureButton] callStyle] addStyleDictionary:@{
-                                                               @"left"            :@"150",
+                                                               @"left"            :@"2",
                                                                @"background-color":@"FF0000",
                                                               }];
         [[[self failureButton] callStyleHighlighted] addStyleDictionary:@{
@@ -95,7 +114,13 @@
 // 表示
 - (void)showWithParentView:(UIView *)parentView
 {
+    CGRect rect = [parentView bounds];
+    rect.origin.y = 0;
+    [parentView setBounds:rect];
+    
     [self set_parentView:parentView];
+    
+    [[self contentView] setCenter:[parentView center]];
     
     [[self _parentView] addSubview:self];
 }
@@ -126,6 +151,15 @@
     }
     
     [self hide];
+}
+
+// タイトル設定
+- (void)setTitle:(NSString *)titleValue
+{
+    if([self titleLabel] != nil)
+    {
+        [[self titleLabel] setText:titleValue];
+    }
 }
 
 @end

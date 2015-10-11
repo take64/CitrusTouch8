@@ -25,6 +25,9 @@
     if (self) {
         
         [self setExclusiveTouch:YES];
+        
+        // 基本のボタンON
+        [self addTarget:self action:@selector(onTapButton:) forControlEvents:UIControlEventTouchUpInside];
     }
     return self;
 }
@@ -40,7 +43,6 @@
 {
     // 設定
     [self setTappedBlock:completeBlock];
-    [self addTarget:self action:@selector(onTapButton:) forControlEvents:UIControlEventTouchUpInside];
 }
 
 // ボタン押下時

@@ -10,5 +10,6 @@
 #define DriveOptima_CitrusTouchPlatform_h
 
 #import "CTPlatformDevice.h"
+#import "CTWebBrowser.h"
 
 #endif

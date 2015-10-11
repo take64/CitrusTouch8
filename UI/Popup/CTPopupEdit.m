@@ -29,7 +29,7 @@
     {
         
         // テーブル
-        [self set_tableView:[[UITableView alloc] initWithFrame:[self contentArea] style:UITableViewStyleGrouped]];
+        [self set_tableView:[[UITableView alloc] initWithFrame:[self innerFrame] style:UITableViewStyleGrouped]];
         [[self _tableView] setDataSource:self];
         [[self _tableView] setDelegate:self];
         [[[self _tableView] layer] setCornerRadius:8];

@@ -43,8 +43,8 @@
                                                      @"background-color"    :@"00000000",
                                                      @"left"                :@"0",
                                                      @"top"                 :@"0",
-                                                     @"width"               :[CTString stringFromInt:frame.size.width],
-                                                     @"height"              :[CTString stringFromInt:frame.size.height],
+                                                     @"width"               :[@(frame.size.width) stringValue],
+                                                     @"height"              :[@(frame.size.height) stringValue],
                                                      }];
         
         // 値監視
@@ -52,6 +52,7 @@
         [[[self callStyleNormal] callAllStyles] addObserver:self forKeyPath:@"height" options:NSKeyValueObservingOptionNew context:NULL];
         [[[self callStyleNormal] callAllStyles] addObserver:self forKeyPath:@"top" options:NSKeyValueObservingOptionNew context:NULL];
         [[[self callStyleNormal] callAllStyles] addObserver:self forKeyPath:@"left" options:NSKeyValueObservingOptionNew context:NULL];
+//        [self addObserver:self forKeyPath:@"text" options:NSKeyValueObservingOptionNew context:NULL];
         
     }
     return self;
@@ -67,7 +68,6 @@
         _size.width = [[[self callStyleNormal] callStyleKey:@"width"] floatValue];
         _frame.size = _size;
         [self setFrame:_frame];
-        //        [[[self callStyleNormal] callAllStyles] removeObserver:self forKeyPath:@"width"];
     }
     // height 変更時
     else if([keyPath isEqualToString:@"height"] == YES)
@@ -77,7 +77,6 @@
         _size.height = [[[self callStyleNormal] callStyleKey:@"height"] floatValue];
         _frame.size = _size;
         [self setFrame:_frame];
-        //        [[[self callStyleNormal] callAllStyles] removeObserver:self forKeyPath:@"height"];
     }
     // top 変更時
     else if([keyPath isEqualToString:@"top"] == YES)
@@ -87,7 +86,6 @@
         _origin.y = [[[self callStyleNormal] callStyleKey:@"top"] floatValue];
         _frame.origin = _origin;
         [self setFrame:_frame];
-        //        [[[self callStyleNormal] callAllStyles] removeObserver:self forKeyPath:@"top"];
     }
     // left 変更時
     else if([keyPath isEqualToString:@"left"] == YES)
@@ -97,7 +95,6 @@
         _origin.x = [[[self callStyleNormal] callStyleKey:@"left"] floatValue];
         _frame.origin = _origin;
         [self setFrame:_frame];
-        //        [[[self callStyleNormal] callAllStyles] removeObserver:self forKeyPath:@"left"];
     }
 }
 // 描画

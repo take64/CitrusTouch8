@@ -113,5 +113,22 @@
 {
     [[self label] setText:stringValue];
 }
+// 文字寄せ
+- (void)setTextAlignment:(NSTextAlignment)textAlignment
+{
+    NSString *textAlign = @"";
+    switch(textAlignment)
+    {
+        case NSTextAlignmentLeft:   textAlign = @"left";    break;
+        case NSTextAlignmentCenter: textAlign = @"center";  break;
+        case NSTextAlignmentRight:  textAlign = @"right";   break;
+        case NSTextAlignmentJustified:
+        case NSTextAlignmentNatural:
+        default:                    textAlign = @"left";    break;
+    }
+    
+    [[[self label] callStyle] addStyleKey:@"text-align" value:textAlign];
+}
+
 
 @end

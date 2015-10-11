@@ -12,7 +12,10 @@
 @interface CTPopupDialog : CTControl
 {
     CTControl *contentView;
-    CGRect contentArea;
+    CGRect contentFrame;
+    CGRect innerFrame;
+    
+    CTLabel *titleLabel;
     
     UIView *_parentView;
     
@@ -28,7 +31,9 @@
 // property
 //
 @property (nonatomic, retain) CTControl *contentView;
-@property (nonatomic, assign) CGRect contentArea;
+@property (nonatomic, assign) CGRect contentFrame;
+@property (nonatomic, assign) CGRect innerFrame;
+@property (nonatomic, retain) CTLabel *titleLabel;
 @property (nonatomic, retain) UIView *_parentView;
 @property (nonatomic, copy  ) CitrusTouchBlock successBlock;
 @property (nonatomic, copy  ) CitrusTouchBlock failureBlock;
@@ -53,4 +58,7 @@
 
 // ボタン押下時(NG)
 - (void)onTapButtonFailure;
+
+// タイトル設定
+- (void)setTitle:(NSString *)titleValue;
 @end
