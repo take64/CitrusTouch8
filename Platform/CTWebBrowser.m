@@ -104,6 +104,47 @@
     return result;
 }
 
+// 名称リスト取得
++ (NSArray *)callNames
+{
+    NSArray *result = @[
+                        @{ @"key" :CTBrowserKeyInner,           @"name" :@"内部ブラウザ"              },
+                        @{ @"key" :CTBrowserKeySafari,          @"name" :@"Safari"                  },
+                        @{ @"key" :CTBrowserKeyFirefox,         @"name" :@"Mozilla Firefox"         },
+                        @{ @"key" :CTBrowserKeyChrome,          @"name" :@"Google Chrome"           },
+                        @{ @"key" :CTBrowserKeyOpera,           @"name" :@"Opera mini"              },
+                        @{ @"key" :CTBrowserKeySleipnir,        @"name" :@"fenrir Sleipnir"         },
+                        @{ @"key" :CTBrowserKeySleipnirBlack,   @"name" :@"fenrir Sleipnir Black"   },
+                        ];
+    return result;
+}
+
+// 名称Dic取得
++ (NSDictionary *)callNameDicWithKey:(NSString *)keyString
+{
+    NSDictionary *result = @{};
+    for(NSDictionary *one in [CTWebBrowser callNames])
+    {
+        if([[one objectForKey:@"key"] isEqualToString:keyString] == YES)
+        {
+            result = one;
+            break;
+        }
+    }
+    return result;
+}
+
+// 名称取得
++ (NSString *)callNameStringWidhKey:(NSString *)keyString
+{
+    NSDictionary *dic = [CTWebBrowser callNameDicWithKey:keyString];
+    NSString *result = @"";
+    if(dic != nil)
+    {
+        result = [dic objectForKey:@"name"];
+    }
+    return result;
+}
 
 
 @end

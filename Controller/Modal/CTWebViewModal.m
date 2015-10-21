@@ -29,32 +29,6 @@
     }
     return self;
 }
-- (void)viewDidLoad
-{
-    [super viewDidLoad];
-}
-- (void)didReceiveMemoryWarning
-{
-    [super didReceiveMemoryWarning];
-}
-
-#pragma mark -
-#pragma mark UIWebViewDelegate
-//
-// UIWebViewDelegate
-//
-
-//- (BOOL)webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType;
-- (void)webViewDidStartLoad:(UIWebView *)webView
-{
-    [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:YES];
-}
-- (void)webViewDidFinishLoad:(UIWebView *)webView
-{
-    [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
-}
-//- (void)webView:(UIWebView *)webView didFailLoadWithError:(NSError *)error;
-
 
 #pragma mark -
 #pragma mark method
@@ -75,22 +49,28 @@
         [self set_parentController:parentController];
         
         // エイリアス
-//        [self set_webView:[[UIWebView alloc] initWithFrame:CGRectMake(0, 0, 320, 416)]];
-        [self set_webView:[[UIWebView alloc] initWithFrame:[[self view] bounds]]];
-        [[self _webView] setDelegate:self];
+        //        [self set_webView:[[UIWebView alloc] initWithFrame:CGRectMake(0, 0, 320, 416)]];
+        [self set_webView:[[WKWebView alloc] initWithFrame:[[self view] bounds]]];
+        [[self _webView] setNavigationDelegate:self];
         [[[self _viewController] view] addSubview:[self _webView]];
         
-        // ナヴィゲーション無し
-        [self setNavigationBarHidden:YES];
+        // ナヴィゲーション表示
+        [self setNavigationBarHidden:NO];
         
-        // スペーサー
-        UIBarButtonItem *buttonSpacer = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil];
+        // ツールバー非表示
+        [self setToolbarHidden:YES];
         
-        // 閉じるボタン
-        UIBarButtonItem *buttonClose = [[UIBarButtonItem alloc] initWithTitle:@"閉じる" style:UIBarButtonItemStylePlain target:self action:@selector(hide)];
-        [buttonClose setTintColor:[UIColor whiteColor]];
-        [[self _viewController] setToolbarItems:@[ buttonSpacer, buttonClose ]];
-        [self setToolbarHidden:NO];
+        // ボタン閉じる
+        UIBarButtonItem *closeButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemStop target:self action:@selector(hide)];
+        [[[self _viewController] navigationItem] setRightBarButtonItem:closeButton];
+        
+        //        // スペーサー
+        //        UIBarButtonItem *buttonSpacer = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil];
+        //
+        //        // 閉じるボタン
+        //        UIBarButtonItem *buttonClose = [[UIBarButtonItem alloc] initWithTitle:@"閉じる" style:UIBarButtonItemStylePlain target:self action:@selector(hide)];
+        //        [buttonClose setTintColor:[UIColor whiteColor]];
+        //        [[self _viewController] setToolbarItems:@[ buttonSpacer, buttonClose ]];
     }
     return self;
 }
@@ -100,6 +80,25 @@
     [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
     [super hide];
 }
+
+
+#pragma mark - WKNavigationDelegate
+//
+// WKNavigationDelegate
+//
+
+//- (void)webView:(WKWebView *)webView decidePolicyForNavigationAction:(WKNavigationAction *)navigationAction decisionHandler:(void (^)(WKNavigationActionPolicy))decisionHandler;
+//- (void)webView:(WKWebView *)webView decidePolicyForNavigationResponse:(WKNavigationResponse *)navigationResponse decisionHandler:(void (^)(WKNavigationResponsePolicy))decisionHandler;
+//- (void)webView:(WKWebView *)webView didStartProvisionalNavigation:(null_unspecified WKNavigation *)navigation;
+//- (void)webView:(WKWebView *)webView didReceiveServerRedirectForProvisionalNavigation:(null_unspecified WKNavigation *)navigation;
+//- (void)webView:(WKWebView *)webView didFailProvisionalNavigation:(null_unspecified WKNavigation *)navigation withError:(NSError *)error;
+//- (void)webView:(WKWebView *)webView didCommitNavigation:(null_unspecified WKNavigation *)navigation;
+//- (void)webView:(WKWebView *)webView didFinishNavigation:(null_unspecified WKNavigation *)navigation;
+//- (void)webView:(WKWebView *)webView didFailNavigation:(null_unspecified WKNavigation *)navigation withError:(NSError *)error;
+//- (void)webView:(WKWebView *)webView didReceiveAuthenticationChallenge:(NSURLAuthenticationChallenge *)challenge completionHandler:(void (^)(NSURLSessionAuthChallengeDisposition disposition, NSURLCredential *__nullable credential))completionHandler;
+//- (void)webViewWebContentProcessDidTerminate:(WKWebView *)webView NS_AVAILABLE(10_11, 9_0);
+
+
 
 
 #pragma mark -

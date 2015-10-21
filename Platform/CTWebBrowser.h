@@ -36,4 +36,14 @@ static NSString *CTBrowserKeySleipnirBlack  = @"sleipnir_black";// bhttp:// bhtt
 // URLを開く
 + (BOOL)openURL:(NSString *)urlString browserKey:(NSString *)browserKey;
 
+// 名称リスト取得
++ (NSArray *)callNames;
+
+// 名称Dic取得
++ (NSDictionary *)callNameDicWithKey:(NSString *)keyString;
+
+// 名称取得
++ (NSString *)callNameStringWidhKey:(NSString *)keyString;
+
+
 @end

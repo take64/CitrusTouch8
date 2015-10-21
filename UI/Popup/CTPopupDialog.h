@@ -9,6 +9,9 @@
 #import "CTControl.h"
 #import "CitrusTouchTypedef.h"
 
+static NSString *CTPopupDialogTypeYESNO = @"YESNO";
+static NSString *CTPopupDialogTypeOK    = @"OK";
+
 @interface CTPopupDialog : CTControl
 {
     CTControl *contentView;
@@ -25,6 +28,8 @@
     CTButton *successButton;
     CTButton *failureButton;
     
+    NSString *dialogType;
+    
 }
 
 //
@@ -39,6 +44,7 @@
 @property (nonatomic, copy  ) CitrusTouchBlock failureBlock;
 @property (nonatomic, retain) CTButton *successButton;
 @property (nonatomic, retain) CTButton *failureButton;
+@property (nonatomic, retain) NSString *dialogType;
 
 //
 // method
@@ -46,6 +52,7 @@
 
 // 初期化
 - (id)initWithFrame:(CGRect)frame;
+- (id)initWithFrame:(CGRect)frame type:(NSString *)typeValue;
 
 // 表示
 - (void)showWithParentView:(UIView *)parentView;

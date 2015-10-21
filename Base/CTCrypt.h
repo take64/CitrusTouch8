@@ -23,17 +23,11 @@
 // base64エンコードする
 + (NSString *) base64EncodeFromString:(NSString *)stringValue;
 
-// base64エンコードする
-+ (NSString *) base64EncodeFromString:(NSString *)stringValue separatedLine:(BOOL)separatedLine;
-
 // base64デコードする
 + (NSString *) base64DecodeFromString:(NSString *)stringValue;
 
 // base64エンコードする
 + (NSData *) base64EncodeFromData:(NSData *)dataValue;
-
-// base64エンコードする
-+ (NSData *) base64EncodeFromData:(NSData *)dataValue separatedLine:(BOOL)separatedLine;
 
 // base64デコードする
 + (NSData *) base64DecodeFromData:(NSData *)dataValue;

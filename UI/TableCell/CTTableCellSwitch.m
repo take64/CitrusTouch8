@@ -84,18 +84,18 @@
 }
 
 // 値取得
-- (BOOL) onBool
+- (BOOL)isON
 {
     return [[self _switch] isOn];
 }
 // 値設定
-- (void) setOn:(BOOL)boolValue
+- (void)setOn:(BOOL)boolValue
 {
     [[self _switch] setOn:boolValue];
 }
 
 // イベント設定
-- (void) addTarget:(id)idValue action:(SEL)selValue forControlEvents:(UIControlEvents)controlEventsValue
+- (void)addTarget:(id)idValue action:(SEL)selValue forControlEvents:(UIControlEvents)controlEventsValue
 {
     [[self _switch] addTarget:idValue action:selValue forControlEvents:controlEventsValue];
 }

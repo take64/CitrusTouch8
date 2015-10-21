@@ -29,7 +29,7 @@
 - (id) initWithPrefix:(NSString *)prefixString content:(BOOL)boolValue reuseIdentifier:(NSString *)reuseIdentifier;
 
 // 値取得
-- (BOOL) onBool;
+- (BOOL) isON;
 // 値設定
 - (void) setOn:(BOOL)boolValue;
 

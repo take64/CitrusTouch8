@@ -6,15 +6,17 @@
 //  Copyright (c) 2012年 citrus.tk. All rights reserved.
 //
 
+#import <WebKit/WebKit.h>
+
 #import "CTModal.h"
 
-@interface CTWebViewModal : CTModal <UIWebViewDelegate>
+@interface CTWebViewModal : CTModal <WKNavigationDelegate>
 {
     // ビュー
     UIViewController *_viewController;
     
     // WebView
-    UIWebView *_webView;
+    WKWebView *_webView;
     
     // リクエスト
     NSMutableURLRequest *_request;
@@ -26,7 +28,7 @@
 // property
 //
 @property (nonatomic, retain) UIViewController *_viewController;
-@property (nonatomic, retain) UIWebView *_webView;
+@property (nonatomic, retain) WKWebView *_webView;
 @property (nonatomic, retain) NSMutableURLRequest *_request;
 
 

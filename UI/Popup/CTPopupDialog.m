@@ -22,6 +22,7 @@
 @synthesize failureBlock;
 @synthesize successButton;
 @synthesize failureButton;
+@synthesize dialogType;
 
 // 初期化
 - (id)initWithFrame:(CGRect)frame
@@ -44,12 +45,11 @@
                                                              @"border-color"    :@"FFFFFF",
                                                              @"border-radius"   :@"4",
                                                              @"background-color":@"333333",
-                                                             
                                                              }];
         [self addSubview:[self contentView]];
         
         // 内部エリア
-        [self setInnerFrame:CGRectMake((4 + 4), (4 + 24), (insetFrame.size.width - (4 + 4 + 4 + 4)), (insetFrame.size.height - (4 + 4 + 24 + 60)))];
+        [self setInnerFrame:CGRectMake((4 + 4), (4 + 24 + 8), (insetFrame.size.width - (4 + 4 + 4 + 4)), (insetFrame.size.height - (4 + 4 + 24 + 60 + 8)))];
         
         // タイトル
         [self setTitleLabel:[[CTLabel alloc] initWithText:@""]];
@@ -57,7 +57,7 @@
                                                             @"top"              :@"4",
                                                             @"left"             :@"4",
                                                             @"width"            :[@(insetFrame.size.width - (4 + 4)) stringValue],
-                                                            @"height"           :@"24",
+                                                            @"height"           :@"32",
                                                             @"font-size"        :@"20",
                                                             @"font-weight"      :@"bold",
                                                             @"color"            :@"FFFFFFFF",
@@ -107,6 +107,20 @@
         
         [[self failureButton] addTarget:self action:@selector(onTapButtonFailure) forControlEvents:UIControlEventTouchUpInside];
         [[self contentView] addSubview:[self failureButton]];
+        
+        // ダイアログ設定
+        [self setDialogType:CTPopupDialogTypeYESNO];
+    }
+    return self;
+}
+
+- (id)initWithFrame:(CGRect)frame type:(NSString *)typeValue
+{
+    self = [self initWithFrame:frame];
+    if(self)
+    {
+        // ダイアログタイプ変更
+        [self setDialogType:typeValue];
     }
     return self;
 }
@@ -159,6 +173,30 @@
     if([self titleLabel] != nil)
     {
         [[self titleLabel] setText:titleValue];
+    }
+}
+
+// ダイアログタイプ変更
+- (void)setDialogType:(NSString *)typeValue
+{
+    if([typeValue isEqualToString:CTPopupDialogTypeOK] == YES)
+    {
+        [[self contentView] addSubview:[self successButton]];
+        [[self failureButton] removeFromSuperview];
+        
+        [[[self successButton] callStyle] addStyleKey:@"left" value:@"2"];
+        [[[self successButton] callStyle] addStyleKey:@"width" value:@"302"];
+    }
+    else if([typeValue isEqualToString:CTPopupDialogTypeYESNO] == YES)
+    {
+        [[self contentView] addSubview:[self successButton]];
+        [[self contentView] addSubview:[self failureButton]];
+        
+        [[[self successButton] callStyle] addStyleKey:@"left" value:@"152"];
+        [[[self successButton] callStyle] addStyleKey:@"width" value:@"150"];
+        
+        [[[self failureButton] callStyle] addStyleKey:@"left" value:@"2"];
+        [[[self failureButton] callStyle] addStyleKey:@"width" value:@"150"];
     }
 }
 
