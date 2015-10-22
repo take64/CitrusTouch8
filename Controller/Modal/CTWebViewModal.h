@@ -20,6 +20,9 @@
     
     // リクエスト
     NSMutableURLRequest *_request;
+    
+    // インジケーター
+    UIProgressView *_progressView;
 }
 
 
@@ -30,6 +33,7 @@
 @property (nonatomic, retain) UIViewController *_viewController;
 @property (nonatomic, retain) WKWebView *_webView;
 @property (nonatomic, retain) NSMutableURLRequest *_request;
+@property (nonatomic, retain) UIProgressView *_progressView;
 
 
 

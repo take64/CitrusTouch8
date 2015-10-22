@@ -20,6 +20,7 @@
 @synthesize _viewController;
 @synthesize _webView;
 @synthesize _request;
+@synthesize _progressView;
 
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
@@ -49,10 +50,14 @@
         [self set_parentController:parentController];
         
         // エイリアス
-        //        [self set_webView:[[UIWebView alloc] initWithFrame:CGRectMake(0, 0, 320, 416)]];
         [self set_webView:[[WKWebView alloc] initWithFrame:[[self view] bounds]]];
         [[self _webView] setNavigationDelegate:self];
         [[[self _viewController] view] addSubview:[self _webView]];
+        
+        // インジケーター
+        [self set_progressView:[[UIProgressView alloc] initWithProgressViewStyle:UIProgressViewStyleBar]];
+        [[self _progressView] setFrame:CGRectMake(0, [[self navigationBar] frame].size.height - 2.5, [[self navigationBar] frame].size.width, 2.5)];
+        [[self navigationBar] addSubview:[self _progressView]];
         
         // ナヴィゲーション表示
         [self setNavigationBarHidden:NO];
@@ -64,15 +69,16 @@
         UIBarButtonItem *closeButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemStop target:self action:@selector(hide)];
         [[[self _viewController] navigationItem] setRightBarButtonItem:closeButton];
         
-        //        // スペーサー
-        //        UIBarButtonItem *buttonSpacer = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil];
-        //
-        //        // 閉じるボタン
-        //        UIBarButtonItem *buttonClose = [[UIBarButtonItem alloc] initWithTitle:@"閉じる" style:UIBarButtonItemStylePlain target:self action:@selector(hide)];
-        //        [buttonClose setTintColor:[UIColor whiteColor]];
-        //        [[self _viewController] setToolbarItems:@[ buttonSpacer, buttonClose ]];
+        // observe
+        [[self _webView] addObserver:self forKeyPath:@"estimatedProgress" options:NSKeyValueObservingOptionNew context:nil];
+        [[self _webView] addObserver:self forKeyPath:@"title" options:NSKeyValueObservingOptionNew context:nil];
     }
     return self;
+}
+- (void)dealloc
+{
+    [[self _webView] removeObserver:self forKeyPath:@"estimatedProgress"];
+    [[self _webView] removeObserver:self forKeyPath:@"title"];
 }
 // 非表示
 - (void) hide
@@ -98,6 +104,33 @@
 //- (void)webView:(WKWebView *)webView didReceiveAuthenticationChallenge:(NSURLAuthenticationChallenge *)challenge completionHandler:(void (^)(NSURLSessionAuthChallengeDisposition disposition, NSURLCredential *__nullable credential))completionHandler;
 //- (void)webViewWebContentProcessDidTerminate:(WKWebView *)webView NS_AVAILABLE(10_11, 9_0);
 
+
+//
+// observe
+//
+- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary<NSString *,id> *)change context:(void *)context
+{
+    if([keyPath isEqualToString:@"estimatedProgress"] == YES)
+    {
+        double progress = [[self _webView] estimatedProgress];
+        NSLog(@"%f", progress);
+        if(progress > 0)
+        {
+            [[self _progressView] setProgress:progress animated:YES];
+            
+            [[self navigationBar] addSubview:[self _progressView]];
+            
+            if(progress == 1)
+            {
+                [[self _progressView] removeFromSuperview];
+            }
+        }
+    }
+    else if ([keyPath isEqualToString:@"title"] == YES)
+    {
+        [[self _viewController] setTitle:[[self _webView] title]];
+    }
+}
 
 
 
