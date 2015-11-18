@@ -22,7 +22,12 @@
     NSMutableURLRequest *_request;
     
     // インジケーター
-    UIProgressView *_progressView;
+    UIProgressView *progressView;
+    
+    // ボタン
+    UIBarButtonItem *prevButton;
+    UIBarButtonItem *nextButton;
+    UIBarButtonItem *reloadButton;
 }
 
 
@@ -33,7 +38,10 @@
 @property (nonatomic, retain) UIViewController *_viewController;
 @property (nonatomic, retain) WKWebView *_webView;
 @property (nonatomic, retain) NSMutableURLRequest *_request;
-@property (nonatomic, retain) UIProgressView *_progressView;
+@property (nonatomic, retain) UIProgressView *progressView;
+@property (nonatomic, retain) UIBarButtonItem *prevButton;
+@property (nonatomic, retain) UIBarButtonItem *nextButton;
+@property (nonatomic, retain) UIBarButtonItem *reloadButton;
 
 
 
@@ -44,11 +52,13 @@
 // 初期化
 - (id) initWithParentController:(UIViewController *)parentController;
 
+// URL読み込み
+- (void)loadURL:(NSString *)urlString;
 
 //
 // singleton
 //
-// リクエスト取得
-- (NSMutableURLRequest *) callRequest;
+//// リクエスト取得
+//- (NSMutableURLRequest *) callRequest;
 
 @end
