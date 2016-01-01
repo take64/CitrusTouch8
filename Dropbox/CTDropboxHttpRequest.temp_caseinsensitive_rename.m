@@ -1,14 +1,14 @@
 //
-//  CTDropBoxHttpRequest.m
+//  CTDropboxHttpRequest.m
 //  CitrusTouch
 //
 //  Created by TAKEMOTO KOUHEI on 2013/12/22.
-//  Copyright (c) 2013年 naissance sapporo co,.Ltd. All rights reserved.
+//  Copyright (c) 2013年 citrus.tk. All rights reserved.
 //
 
-#import "CTDropBoxHttpRequest.h"
+#import "CTDropboxHttpRequest.h"
 
-@implementation CTDropBoxHttpRequest
+@implementation CTDropboxHttpRequest
 
 
 // ファイルの保存

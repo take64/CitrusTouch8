@@ -3,7 +3,7 @@
 //  CitrusTouch
 //
 //  Created by Take on 13/12/26.
-//  Copyright (c) 2013年 naissance sapporo co,.Ltd. All rights reserved.
+//  Copyright (c) 2013年 citrus.tk. All rights reserved.
 //
 
 #import "CTSingleSelectViewController.h"

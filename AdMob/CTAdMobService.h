@@ -8,6 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
+//@import GoogleMobileAds;
 #import <GoogleMobileAds/GoogleMobileAds.h>
 
 @interface CTAdMobService : NSObject

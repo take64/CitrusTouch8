@@ -3,7 +3,7 @@
 //  CitrusTouch
 //
 //  Created by TAKEMOTO KOUHEI on 2013/12/22.
-//  Copyright (c) 2013年 naissance sapporo co,.Ltd. All rights reserved.
+//  Copyright (c) 2013年 citrus.tk. All rights reserved.
 //
 
 #import "CTListViewController.h"
@@ -20,6 +20,15 @@
 @synthesize fetchedResultsController;
 @synthesize headViewCaches;
 
+// 初期化
+- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
+{
+    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
+    if(self)
+    {
+    }
+    return self;
+}
 
 // 初期化
 - (id)initWithStyle:(UITableViewStyle)style
@@ -38,12 +47,15 @@
     
     [[self callFetchedResultsController] setDelegate:self];
     [[self callFetchedResultsController] performFetch:nil];
+    
+    [[self tableView] reloadData];
 }
-- (void)viewDidAppear:(BOOL)animated
+- (void)viewDidDisappear:(BOOL)animated
 {
-    [super viewDidAppear:animated];
+    [super viewDidDisappear:animated];
     
     [[self callFetchedResultsController] setDelegate:nil];
+    [self setFetchedResultsController:nil];
 }
 - (void)viewDidLoad
 {
