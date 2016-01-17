@@ -9,7 +9,8 @@
 #ifndef CitrusTouch_CitrusTouchDropbox_h
 #define CitrusTouch_CitrusTouchDropbox_h
 
-#import "CTDropboxDatasourceRequest.h"
-#import "CTDropBoxHttpRequest.h"
+//#import "CTDropboxDatasourceRequest.h"
+#import "CTDropbox.h"
+#import "CTDropboxCoreApi.h"
 
 #endif

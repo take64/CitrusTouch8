@@ -16,4 +16,8 @@
 // entity用ユニークID
 + (NSString *) uniqueIDSeed1:(NSString *)seed1 seed2:(NSString *)seed2;
 
+// entity配列のdictionary配列化
++ (NSArray *)dictionariesWithEntities:(NSArray *)entities;
+
+
 @end

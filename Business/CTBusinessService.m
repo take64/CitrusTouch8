@@ -29,4 +29,48 @@
     NSString *generateID = [NSString stringWithFormat:@"%@%@", half01, half02];
     return generateID;
 }
+
+// entity配列のdictionary配列化
++ (NSArray *)dictionariesWithEntities:(NSArray *)entities
+{
+    if(entities == nil)
+    {
+        return [NSArray array];
+    }
+    if([entities count] == 0)
+    {
+        return [NSArray array];
+    }
+    
+    // entity
+    NSManagedObject *firstEntity = [entities firstObject];
+    // カラム名リスト
+    NSDictionary *columns = [[firstEntity entity] attributesByName];
+    // 返却値
+    NSMutableArray *results = [NSMutableArray array];
+    
+    // 変換
+    for(NSManagedObject *entity in entities)
+    {
+        NSMutableDictionary *result = [NSMutableDictionary dictionary];
+        for(NSString *column in columns)
+        {
+            id value = [entity valueForKey:column];
+            if (value == nil)
+            {
+                value = [NSNull null];
+            }
+            if([value isKindOfClass:[NSDate class]] == YES)
+            {
+                value = [CTDate stringWithDate:value format:@"yyyyMMddHHmmss"];
+            }
+            [result setObject:value forKey:column];
+        }
+        [results addObject:result];
+    }
+    
+    return [results copy];
+}
+
+
 @end

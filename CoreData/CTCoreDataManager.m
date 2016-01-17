@@ -63,7 +63,7 @@ static const NSString *NSManagedObjectContextThreadKey = @"NSManagedObjectContex
     if(context == nil)
     {
         // 生成
-        context = [[NSManagedObjectContext alloc] init];
+        context = [[NSManagedObjectContext alloc] initWithConcurrencyType:NSMainQueueConcurrencyType];
         // ストア関連付け
         [context setPersistentStoreCoordinator:[self persistentStoreCoordinator]];
         // 現在スレッドに設定
