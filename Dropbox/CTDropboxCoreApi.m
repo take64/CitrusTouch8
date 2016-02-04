@@ -16,6 +16,9 @@
 @synthesize restClient;
 @synthesize progressBlock;
 @synthesize completeBlock;
+@synthesize deleteBlock;
+@synthesize searchSuccessBlock;
+@synthesize searchFailureBlock;
 
 
 // 初期化
@@ -40,8 +43,23 @@
     // 一旦ファイル保存
     NSString *localDir = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES)[0];
     NSString *localPath = [localDir stringByAppendingPathComponent:filename];
+    NSString *filepath = [NSString stringWithFormat:@"%@%@", directory, filename];
     
-    [[self restClient] loadFile:[NSString stringWithFormat:@"%@%@", directory, filename] intoPath:localPath];
+//    [[self restClient] loadFile:[NSString stringWithFormat:@"%@%@", directory, filename] intoPath:localPath];
+    
+    // ファイル受信
+    CTDropboxCoreApi *coreApi1 = self;
+    [self setSearchSuccessBlock:^{
+        
+        [[coreApi1 restClient] loadFile:filepath intoPath:localPath];
+    }];
+    [self setSearchFailureBlock:^{
+        if(self.completeBlock != nil)
+        {
+            coreApi1.completeBlock(nil, nil);
+        }
+    }];
+    [[self restClient] searchPath:directory forKeyword:filename];
     
 }
 
@@ -55,11 +73,28 @@
     // 一旦ファイル保存
     NSString *localDir = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES)[0];
     NSString *localPath = [localDir stringByAppendingPathComponent:filename];
+    NSString *filepath = [NSString stringWithFormat:@"%@%@", directory, filename];
     [dataValue writeToFile:localPath atomically:YES];
     
     // ファイル送信
-    [[self restClient] deletePath:filename];
-    [[self restClient] uploadFile:filename toPath:directory withParentRev:nil fromPath:localPath];
+    CTDropboxCoreApi *coreApi1 = self;
+    CTDropboxCoreApi *coreApi2 = self;
+    [self setSearchSuccessBlock:^{
+    
+        [coreApi1 setDeleteBlock:^{
+            
+            [[coreApi2 restClient] uploadFile:filename toPath:directory withParentRev:nil fromPath:localPath];
+        }];
+        [[coreApi1 restClient] deletePath:filename];
+    }];
+    [self setSearchFailureBlock:^{
+    
+        [[coreApi1 restClient] uploadFile:filename toPath:directory withParentRev:nil fromPath:localPath];
+    }];
+    [[self restClient] searchPath:directory forKeyword:filename];
+//    [[self restClient] deletePath:filename];
+//    sleep(1);
+//    [[self restClient] uploadFile:filename toPath:directory withParentRev:nil fromPath:localPath];
 }
 
 
@@ -161,8 +196,20 @@
 //- (void)restClient:(DBRestClient*)client createFolderFailedWithError:(NSError*)error;
 //// [error userInfo] contains the root and path
 //
-//- (void)restClient:(DBRestClient*)client deletedPath:(NSString *)path;
-//- (void)restClient:(DBRestClient*)client deletePathFailedWithError:(NSError*)error;
+- (void)restClient:(DBRestClient*)client deletedPath:(NSString *)path
+{
+    if(self.deleteBlock != nil)
+    {
+        self.deleteBlock();
+    }
+}
+- (void)restClient:(DBRestClient*)client deletePathFailedWithError:(NSError*)error
+{
+    if(self.deleteBlock != nil)
+    {
+        self.deleteBlock();
+    }
+}
 //// [error userInfo] contains the root and path
 //
 //- (void)restClient:(DBRestClient*)client copiedPath:(NSString *)fromPath to:(DBMetadata *)to;
@@ -182,10 +229,30 @@
 //- (void)restClient:(DBRestClient*)client movePathFailedWithError:(NSError*)error;
 //// [error userInfo] contains the root and path
 //
-//- (void)restClient:(DBRestClient*)restClient loadedSearchResults:(NSArray*)results
-//           forPath:(NSString*)path keyword:(NSString*)keyword;
-//// results is a list of DBMetadata * objects
-//- (void)restClient:(DBRestClient*)restClient searchFailedWithError:(NSError*)error;
+- (void)restClient:(DBRestClient*)restClient loadedSearchResults:(NSArray*)results forPath:(NSString*)path keyword:(NSString*)keyword
+{
+    if([results count] > 0)
+    {
+        if(self.searchSuccessBlock != nil)
+        {
+            self.searchSuccessBlock();
+        }
+    }
+    else
+    {
+        if(self.searchFailureBlock != nil)
+        {
+            self.searchFailureBlock();
+        }
+    }
+}
+- (void)restClient:(DBRestClient*)restClient searchFailedWithError:(NSError*)error
+{
+    if(self.searchFailureBlock != nil)
+    {
+        self.searchFailureBlock();
+    }
+}
 //
 //- (void)restClient:(DBRestClient*)restClient loadedSharableLink:(NSString*)link
 //           forFile:(NSString*)path;

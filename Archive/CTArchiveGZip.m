@@ -23,7 +23,7 @@
     zStream.zfree = Z_NULL;
     zStream.opaque = Z_NULL;
     
-    deflateInit(&zStream, level);
+    deflateInit2(&zStream, level, Z_DEFLATED, MAX_WBITS|16, 5, Z_DEFAULT_STRATEGY);
     
     zStream.avail_in = (uInt)[dataValue length];
     zStream.next_in = (Bytef *)[dataValue bytes];
@@ -60,7 +60,7 @@
     zStream.zfree = Z_NULL;
     zStream.opaque = Z_NULL;
     
-    inflateInit(&zStream);
+    inflateInit2(&zStream, MAX_WBITS|16|16);
     
     zStream.avail_in = (uInt)[dataValue length];
     zStream.next_in = (Bytef *)[dataValue bytes];

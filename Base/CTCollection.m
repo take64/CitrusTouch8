@@ -24,7 +24,7 @@
     for(NSDictionary *sortDic in sortList)
     {
         NSString *columnName = [[sortDic allKeys] objectAtIndex:0];
-        BOOL sortAscending = (BOOL)[sortDic objectForKey:columnName];
+        BOOL sortAscending = [[sortDic objectForKey:columnName] boolValue];
         NSSortDescriptor *sort = [NSSortDescriptor sortDescriptorWithKey:columnName ascending:sortAscending];
         [sortDescriptors addObject:sort];
     }

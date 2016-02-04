@@ -236,14 +236,6 @@
         NSString *textString = [[self xAxisTitles] objectAtIndex:i];
         CGSize textSize = [textString sizeWithAttributes:attributes];
         [textString drawInRect:CGRectMake(rect.origin.x + (lineOffset * i) - (textSize.width / 2), rect.origin.y + [self xAxisMainLineLength],textSize.width, textSize.height) withAttributes:attributes];
-//        CGSize textSize = [textString sizeWithFont:[UIFont systemFontOfSize:14]];
-//        [textString drawInRect:CGRectMake(rect.origin.x + (lineOffset * i) - (textSize.width / 2),
-//                                          rect.origin.y + [self xAxisMainLineLength],
-//                                          textSize.width,
-//                                          textSize.height)
-//                      withFont:[UIFont systemFontOfSize:14]
-//                 lineBreakMode:NSLineBreakByCharWrapping
-//                     alignment:NSTextAlignmentCenter];
     }
     
     

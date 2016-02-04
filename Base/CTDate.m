@@ -207,6 +207,35 @@
     return [calendar dateFromComponents:components];
 }
 
+// コンポーネントの取得
++ (NSDateComponents *)componentsWithDate:(NSDate *)dateValue
+{
+    NSCalendar *calendar = [self callCalendar];
+    NSDateComponents *components = [calendar components:(NSCalendarUnitYear | NSCalendarUnitMonth | NSCalendarUnitDay | NSCalendarUnitHour | NSCalendarUnitMinute | NSCalendarUnitSecond | NSCalendarUnitWeekday) fromDate:dateValue];
+    
+    return components;
+}
+
+// 日付の取得
++ (NSDate *)dateWithYear:(NSInteger)year month:(NSInteger)month day:(NSInteger)day hour:(NSInteger)hour minute:(NSInteger)minute second:(NSInteger)second
+{
+    return [[self callCalendar] dateWithEra:1 year:year month:month day:day hour:hour minute:minute second:second nanosecond:0];
+}
+
+// カレンダーの取得
++ (NSCalendar *)callCalendar
+{
+    static NSCalendar *calendar;
+    if(calendar == nil)
+    {
+        calendar = [[NSCalendar alloc] initWithCalendarIdentifier:NSCalendarIdentifierGregorian];
+        [calendar setLocale:[[NSLocale alloc] initWithLocaleIdentifier:@"ja_JP"]];
+        [calendar setTimeZone:[NSTimeZone systemTimeZone]];
+    }
+    return calendar;
+}
+
+
 
 //// NSDateから日付だけのNSDateを取得
 //+ (NSDate *) dateOnlyWithDate:(NSDate *)dateValue

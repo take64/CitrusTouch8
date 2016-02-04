@@ -150,4 +150,9 @@
     return colorString;
 }
 
+- (NSString *)description
+{
+    return [CTColor hexStringWithColor:self];
+}
+
 @end

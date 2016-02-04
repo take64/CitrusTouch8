@@ -18,6 +18,10 @@
     CitrusTouchCompleteBlock progressBlock;
     CitrusTouchCompleteBlock completeBlock;
     
+    CitrusTouchBlock deleteBlock;
+    CitrusTouchBlock searchSuccessBlock;
+    CitrusTouchBlock searchFailureBlock;
+    
 }
 //
 // property
@@ -25,6 +29,9 @@
 @property (nonatomic, retain) DBRestClient *restClient;
 @property (nonatomic, copy)   CitrusTouchCompleteBlock progressBlock;
 @property (nonatomic, copy)   CitrusTouchCompleteBlock completeBlock;
+@property (nonatomic, copy)   CitrusTouchBlock deleteBlock;
+@property (nonatomic, copy)   CitrusTouchBlock searchSuccessBlock;
+@property (nonatomic, copy)   CitrusTouchBlock searchFailureBlock;
 
 
 //

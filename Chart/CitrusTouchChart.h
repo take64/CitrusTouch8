@@ -10,6 +10,11 @@
 #define CitrusTouch_CitrusTouchChart_h
 
 #import "CTChartLine.h"
+#import "CTChartPie.h"
+
+#import "CTChartData.h"
+
+#import "CTChartCommon.h"
 
 // padding
 typedef struct {
