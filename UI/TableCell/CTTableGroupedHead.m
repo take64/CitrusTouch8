@@ -2,7 +2,7 @@
 //  CTTableGroupedHead.m
 //  CitrusTouch
 //
-//  Created by TAKEMOTO KOUHEI on 2013/02/16.
+//  Created by take64 on 2013/02/16.
 //  Copyright (c) 2013年 citrus.tk. All rights reserved.
 //
 
@@ -35,7 +35,7 @@
 //         @"left"            :@"9",
 //         @"top"             :@"0",
          @"width"           :@"320",
-//         @"height"          :@"40",
+         @"height"          :@"24",
          @"text-align"      :@"left",
          @"text-shadow"     :@"0 -1 1 666666",
          @"font-weight"     :@"bold",

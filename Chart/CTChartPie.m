@@ -1,12 +1,17 @@
 //
 //  CTChartPie.m
-//  AccountBookPod2
+//  CitrusTouch
 //
-//  Created by TAKEMOTO KOUHEI on 2016/01/31.
+//  Created by take64 on 2016/01/31.
 //  Copyright © 2016年 citrus.tk. All rights reserved.
 //
 
 #import "CTChartPie.h"
+
+#import "CTChart.h"
+#import "CTChartData.h"
+
+#import "CTColor.h"
 
 @implementation CTChartPie
 
@@ -39,10 +44,10 @@
     NSMutableArray<CTChartData *> *list = [[self dataList] mutableCopy];
     
     // ソート
-    list = [[CTCollection sortWithEntityArray:list sort:@[ @{@"zValue":@NO} ]] mutableCopy];
+    list = [[CTCollection sortWithEntityArray:list sort:@[ @{@"value":@NO} ]] mutableCopy];
     
     // 色リスト
-    NSArray<NSString *> *colorList = [CTChartCommon callColorList];
+    NSArray<NSString *> *colorList = [CTChart callColorList];
     NSInteger colorLimit = [colorList count];
     NSInteger colorCount = 0;
     
@@ -62,7 +67,7 @@
     NSNumber *totalValue = @0;
     for(CTChartData *one in [self dataList])
     {
-        totalValue = @([totalValue doubleValue] + [[one zValue] doubleValue]);
+        totalValue = @([totalValue doubleValue] + [[one value] doubleValue]);
     }
     
     
@@ -80,7 +85,7 @@
     for(CTChartData *one in [self dataList])
     {
         // 角度
-        double angle = [[one zValue] doubleValue] / [totalValue doubleValue];
+        double angle = [[one value] doubleValue] / [totalValue doubleValue];
         // 開始角度
         double startAngle = nowAngle + (M_PI/180)*360;
         
@@ -118,7 +123,7 @@
         CGPoint point = CGPointMake((160 + 110 * cos(textAngle)), (160 + 110 * sin(textAngle)));
 //        NSLog(@"%@; x = %f; y = %f; start = %f; end = %f", [one title], point.x, point.y, startAngle, endAngle);
         // 文字描画
-        NSString *textString = [NSString stringWithFormat:@"%@\n%.1f%%", [one title], ([[one zValue] doubleValue] / [totalValue doubleValue] * 100)];
+        NSString *textString = [NSString stringWithFormat:@"%@\n%.1f%%", [one title], ([[one value] doubleValue] / [totalValue doubleValue] * 100)];
         NSInteger offset = 00;
         CGSize textSize = [textString sizeWithAttributes:attributes];
         if(point.x > 160)

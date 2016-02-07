@@ -2,7 +2,7 @@
 //  CitrusTouchDropbox.h
 //  CitrusTouch
 //
-//  Created by TAKEMOTO KOUHEI on 2015/03/23.
+//  Created by take64 on 2015/03/23.
 //  Copyright (c) 2015年 citrus.tk. All rights reserved.
 //
 

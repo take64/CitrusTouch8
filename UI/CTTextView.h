@@ -2,7 +2,7 @@
 //  CTTextView.h
 //  CitrusTouch
 //
-//  Created by TAKEMOTO KOUHEI on 2013/02/05.
+//  Created by take64 on 2013/02/05.
 //  Copyright (c) 2013年 citrus.tk. All rights reserved.
 //
 

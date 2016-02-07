@@ -2,7 +2,7 @@
 //  CTString.m
 //  CitrusTouch
 //
-//  Created by TAKEMOTO KOUHEI on 2012/11/14.
+//  Created by take64 on 2012/11/14.
 //  Copyright (c) 2012年 citrus.tk. All rights reserved.
 //
 

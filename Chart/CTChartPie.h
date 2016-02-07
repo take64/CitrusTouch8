@@ -1,8 +1,8 @@
 //
 //  CTChartPie.h
-//  AccountBookPod2
+//  CitrusTouch
 //
-//  Created by TAKEMOTO KOUHEI on 2016/01/31.
+//  Created by take64 on 2016/01/31.
 //  Copyright © 2016年 citrus.tk. All rights reserved.
 //
 

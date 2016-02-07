@@ -2,7 +2,7 @@
 //  CTColor.h
 //  CitrusTouch
 //
-//  Created by TAKEMOTO KOUHEI on 2012/10/01.
+//  Created by take64 on 2012/10/01.
 //  Copyright (c) 2012年 citrus.tk. All rights reserved.
 //
 
@@ -21,5 +21,15 @@
 
 // CTColor(UIColor) から 16進数文字列を取得
 + (NSString *) hexStringWithColor:(CTColor *)colorValue;
+
+//// 色取得(赤)
+//- (CGFloat)colorRed;
+//// 色取得(緑)
+//- (CGFloat)colorGreen;
+//// 色取得(青)
+//- (CGFloat)colorBlue;
+//// 色取得(透)
+//- (CGFloat)colorAlpha;
+
 
 @end

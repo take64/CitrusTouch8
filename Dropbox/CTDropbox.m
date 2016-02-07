@@ -2,7 +2,7 @@
 //  CTDropbox.m
 //  AccountBookPod2
 //
-//  Created by TAKEMOTO KOUHEI on 2016/01/01.
+//  Created by take64 on 2016/01/01.
 //  Copyright © 2016年 citrus.tk. All rights reserved.
 //
 

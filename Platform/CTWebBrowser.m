@@ -2,7 +2,7 @@
 //  CTWebBrowser.m
 //  CitrusTouch
 //
-//  Created by TAKEMOTO KOUHEI on 2015/10/11.
+//  Created by take64 on 2015/10/11.
 //  Copyright © 2015年 citrus.tk. All rights reserved.
 //
 

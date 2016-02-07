@@ -2,7 +2,7 @@
 //  CitrusTouchUI.h
 //  CitrusTouch
 //
-//  Created by TAKEMOTO KOUHEI on 2012/10/12.
+//  Created by take64 on 2012/10/12.
 //  Copyright (c) 2012年 citrus.tk. All rights reserved.
 //
 
@@ -37,6 +37,7 @@
 // tableCell
 #import "CTTableCell.h"
 #import "CTTableCellDatePicker.h"
+#import "CTTableCellNumberPicker.h"
 #import "CTTableCellTextField.h"
 #import "CTTableCellLabel.h"
 #import "CTTableCellSegmentedControl.h"

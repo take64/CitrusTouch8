@@ -2,7 +2,7 @@
 //  CitrusTouchTypedef.h
 //  CitrusTouch
 //
-//  Created by TAKEMOTO KOUHEI on 12/01/06.
+//  Created by take64 on 12/01/06.
 //  Copyright (c) 2012 citrus.tk. All rights reserved.
 //
 

@@ -2,7 +2,7 @@
 //  CTTableCellSwitch.h
 //  CitrusTouch
 //
-//  Created by TAKEMOTO KOUHEI on 2012/11/27.
+//  Created by take64 on 2012/11/27.
 //  Copyright (c) 2012年 citrus.tk. All rights reserved.
 //
 

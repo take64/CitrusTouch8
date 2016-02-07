@@ -2,7 +2,7 @@
 //  CTNetwork.m
 //  LorsPOS
 //
-//  Created by TAKEMOTO KOUHEI on 12/01/14.
+//  Created by take64 on 12/01/14.
 //  Copyright (c) 2012年 citrus.tk. All rights reserved.
 //
 

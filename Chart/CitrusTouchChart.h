@@ -2,19 +2,21 @@
 //  CitrusTouchChart.h
 //  CitrusTouch
 //
-//  Created by TAKEMOTO KOUHEI on 2013/02/28.
+//  Created by take64 on 2013/02/28.
 //  Copyright (c) 2013年 citrus.tk. All rights reserved.
 //
 
 #ifndef CitrusTouch_CitrusTouchChart_h
 #define CitrusTouch_CitrusTouchChart_h
 
+#import "CTChart.h"
+
 #import "CTChartLine.h"
 #import "CTChartPie.h"
 
 #import "CTChartData.h"
+#import "CTChartList.h"
 
-#import "CTChartCommon.h"
 
 // padding
 typedef struct {

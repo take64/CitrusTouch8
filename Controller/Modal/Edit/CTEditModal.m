@@ -2,7 +2,7 @@
 //  CTEditModal.m
 //  CitrusTouch
 //
-//  Created by TAKEMOTO KOUHEI on 2012/11/24.
+//  Created by take64 on 2012/11/24.
 //  Copyright (c) 2012年 citrus.tk. All rights reserved.
 //
 
@@ -235,24 +235,28 @@
         // 削除ボタン
         [self setRemoveButton:[[CTButton alloc] initWithText:@"削除"]];
         [[[self removeButton] callStyle] addStyleDictionary:@{
-         @"top"             :@"0",
-         @"left"            :@"0",
-         @"width"           :@"160",
-         @"height"          :@"64",
-         @"font-size"       :@"20",
-         @"font-weight"     :@"bold",
-         @"text-shadow"     :@"0 -1 1 333333",
-         @"background-color":@"FF0000",
-         @"border-color"    :@"FFFFFF",
-         @"border-width"    :@"1",
-         @"border-radius"   :@"8",
-         @"margin"          :@"4 12 12 12",
-         @"box-shadow"      :@"0 1 4 000000",
-         @"background-image":@"linear-gradient(rgba(1.00, 1.00, 1.00, 0.75) 0.00, rgba(0.75, 0.75, 0.75, 0.50) 0.05, rgba(0.50, 0.50, 0.50, 0.50) 0.95, rgba(0.25, 0.25, 0.25, 0.75) 1.00)",
+                                                              @"top"             :@"0",
+                                                              @"left"            :@"0",
+                                                              @"width"           :@"160",
+                                                              @"height"          :@"64",
+                                                              @"font-size"       :@"20",
+                                                              @"font-weight"     :@"bold",
+                                                              @"text-shadow"     :@"0 -1 1 333333",
+                                                              @"background-color":@"FF0000",
+                                                              @"border-color"    :@"FFFFFF",
+                                                              @"border-width"    :@"1",
+                                                              @"border-radius"   :@"8",
+                                                              @"margin"          :@"4 12 12 12",
+                                                              @"box-shadow"      :@"0 1 4 000000",
+                                                              @"background-image":@"linear-gradient(rgba(1.00, 1.00, 1.00, 0.75) 0.00, rgba(0.75, 0.75, 0.75, 0.50) 0.05, rgba(0.50, 0.50, 0.50, 0.50) 0.95, rgba(0.25, 0.25, 0.25, 0.75) 1.00)",
          }];
         [[[self removeButton] callStyleHighlighted] addStyleDictionary:@{
-         @"background-image":@"linear-gradient(rgba(0.10, 0.10, 0.10, 0.90) 0.00, rgba(0.10, 0.10, 0.10, 0.50) 0.05, rgba(0.10, 0.10, 0.10, 0.50) 0.95, rgba(0.10, 0.10, 0.10, 0.90) 1.00)",
+                                                                         @"background-image":@"linear-gradient(rgba(0.10, 0.10, 0.10, 0.90) 0.00, rgba(0.10, 0.10, 0.10, 0.50) 0.05, rgba(0.10, 0.10, 0.10, 0.50) 0.95, rgba(0.10, 0.10, 0.10, 0.90) 1.00)",
          }];
+        [[[self removeButton] callStyleDisabled] addStyleDictionary:@{
+                                                                      @"background-color":@"666666",
+                                                                      @"background-image":@"linear-gradient(rgba(0.10, 0.10, 0.10, 0.90) 0.00, rgba(0.10, 0.10, 0.10, 0.50) 0.05, rgba(0.10, 0.10, 0.10, 0.50) 0.95, rgba(0.10, 0.10, 0.10, 0.90) 1.00)",
+                                                                         }];
         [[self _tableView] setTableFooterView:[self removeButton]];
         [[self removeButton] addTarget:self action:@selector(onTapButtonRemove) forControlEvents:UIControlEventTouchUpInside];
         

@@ -2,7 +2,7 @@
 //  CTBonjour.h
 //  Bonjour
 //
-//  Created by TAKEMOTO KOUHEI on 2014/02/16.
+//  Created by take64 on 2014/02/16.
 //  Copyright (c) 2014年 citrus.tk. All rights reserved.
 //
 

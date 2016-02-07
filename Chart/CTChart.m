@@ -1,14 +1,14 @@
 //
-//  CTChartCommon.m
-//  AccountBookPod2
+//  CTChart.m
+//  CitrusTouch
 //
-//  Created by TAKEMOTO KOUHEI on 2016/02/01.
+//  Created by take64 on 2016/02/01.
 //  Copyright © 2016年 citrus.tk. All rights reserved.
 //
 
-#import "CTChartCommon.h"
+#import "CTChart.h"
 
-@implementation CTChartCommon
+@implementation CTChart
 
 
 // 色リスト

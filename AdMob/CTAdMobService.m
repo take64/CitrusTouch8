@@ -2,7 +2,7 @@
 //  CTAdMobService.m
 //  CitrusTouch
 //
-//  Created by TAKEMOTO KOUHEI on 2013/01/31.
+//  Created by take64 on 2013/01/31.
 //  Copyright (c) 2013年 BESIDES+. All rights reserved.
 //
 

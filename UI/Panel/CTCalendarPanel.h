@@ -1,8 +1,8 @@
 //
 //  CTCalendarPanel.h
-//  CaloryDeposit2
+//  AccountBook2
 //
-//  Created by TAKEMOTO KOUHEI on 2014/03/05.
+//  Created by take64 on 2014/03/05.
 //  Copyright (c) 2014年 citrus.tk. All rights reserved.
 //
 

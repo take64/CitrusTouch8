@@ -142,8 +142,38 @@
     return fetchedResultsController;
 }
 
+// count取得(1件)
++ (NSNumber *) countWithContext:(NSManagedObjectContext *)context entityName:(NSString *)entityName columnName:(NSString *)columnName whereQuery:(NSString *)whereQuery whereParameters:(NSArray *)whereParameters
+{
+    return [CTCoreDataRequest functionWithContext:context entityName:entityName functionName:@"count:" columnName:columnName whereQuery:whereQuery whereParameters:whereParameters];
+}
+
+// max取得(1件)
++ (NSNumber *) maxWithContext:(NSManagedObjectContext *)context entityName:(NSString *)entityName columnName:(NSString *)columnName whereQuery:(NSString *)whereQuery whereParameters:(NSArray *)whereParameters
+{
+    return [CTCoreDataRequest functionWithContext:context entityName:entityName functionName:@"max:" columnName:columnName whereQuery:whereQuery whereParameters:whereParameters];
+}
+
+// min取得(1件)
++ (NSNumber *) minWithContext:(NSManagedObjectContext *)context entityName:(NSString *)entityName columnName:(NSString *)columnName whereQuery:(NSString *)whereQuery whereParameters:(NSArray *)whereParameters
+{
+    return [CTCoreDataRequest functionWithContext:context entityName:entityName functionName:@"min:" columnName:columnName whereQuery:whereQuery whereParameters:whereParameters];
+}
+
+// average取得(1件)
++ (NSNumber *) averageWithContext:(NSManagedObjectContext *)context entityName:(NSString *)entityName columnName:(NSString *)columnName whereQuery:(NSString *)whereQuery whereParameters:(NSArray *)whereParameters
+{
+    return [CTCoreDataRequest functionWithContext:context entityName:entityName functionName:@"average:" columnName:columnName whereQuery:whereQuery whereParameters:whereParameters];
+}
+
+// sum取得(1件)
++ (NSNumber *) sumWithContext:(NSManagedObjectContext *)context entityName:(NSString *)entityName columnName:(NSString *)columnName whereQuery:(NSString *)whereQuery whereParameters:(NSArray *)whereParameters
+{
+    return [CTCoreDataRequest functionWithContext:context entityName:entityName functionName:@"sum:" columnName:columnName whereQuery:whereQuery whereParameters:whereParameters];
+}
+
 // 件数取得(1件)
-+ (NSInteger) countWithContext:(NSManagedObjectContext *)context entityName:(NSString *)entityName columnName:(NSString *)columnName whereQuery:(NSString *)whereQuery whereParameters:(NSArray *)whereParameters
++ (NSNumber *) functionWithContext:(NSManagedObjectContext *)context entityName:(NSString *)entityName functionName:(NSString *)functionName columnName:(NSString *)columnName whereQuery:(NSString *)whereQuery whereParameters:(NSArray *)whereParameters
 {
     // リクエスト
     NSFetchRequest *request = [[NSFetchRequest alloc] init];
@@ -154,10 +184,10 @@
 
     // expression
     NSExpression *keyPathExpression = [NSExpression expressionForKeyPath:columnName];
-    NSExpression *expression = [NSExpression expressionForFunction:@"count:" arguments:@[ keyPathExpression ]];
+    NSExpression *expression = [NSExpression expressionForFunction:functionName arguments:@[ keyPathExpression ]];
     // expression description
     NSExpressionDescription *expressionDescription = [[NSExpressionDescription alloc] init];
-    [expressionDescription setName:@"countID"];
+    [expressionDescription setName:@"result"];
     [expressionDescription setExpression:expression];
     [expressionDescription setExpressionResultType:NSInteger16AttributeType];
 
@@ -172,20 +202,20 @@
     // データ取得
     NSError *error;
     NSArray *results = [context executeFetchRequest:request error:&error];
-    NSNumber *countID;
+    NSNumber *result;
 
     // エラー
     if(error)
     {
         NSLog(@"ERROR! CTCoreDataService.maxWithContext - %@",error);
-        countID = @0;
+        result = @0;
     }
     else
     {
-        countID = [[results objectAtIndex:0] valueForKey:@"countID"];
+        result = [[results objectAtIndex:0] valueForKey:@"result"];
     }
     
-    return [countID integerValue];
+    return result;
 }
 
 @end

@@ -2,7 +2,7 @@
 //  CTNVL.m
 //  LorsPOS
 //
-//  Created by TAKEMOTO KOUHEI on 12/01/19.
+//  Created by take64 on 12/01/19.
 //  Copyright (c) 2012 citrus.tk. All rights reserved.
 //
 

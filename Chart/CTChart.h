@@ -1,14 +1,14 @@
 //
-//  CTChartCommon.h
-//  AccountBookPod2
+//  CTChart.h
+//  CitrusTouch
 //
-//  Created by TAKEMOTO KOUHEI on 2016/02/01.
+//  Created by take64 on 2016/02/01.
 //  Copyright © 2016年 citrus.tk. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>
 
-@interface CTChartCommon : NSObject
+@interface CTChart : NSObject
 
 // 色リスト
 + (NSArray<NSString *> *) callColorList;

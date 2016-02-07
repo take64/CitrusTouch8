@@ -1,8 +1,8 @@
 //
 //  CTChartData.m
-//  AccountBookPod2
+//  CitrusTouch
 //
-//  Created by TAKEMOTO KOUHEI on 2016/01/31.
+//  Created by take64 on 2016/01/31.
 //  Copyright © 2016年 citrus.tk. All rights reserved.
 //
 
@@ -14,28 +14,28 @@
 // synthesize
 //
 @synthesize title;
-@synthesize zValue;
+@synthesize value;
 @synthesize color;
 
 
-// 初期化(PIEチャート用)
-- (id)initPieDataWithTitle:(NSString *)titleString value:(NSNumber *)valueNumber
+// 初期化
+- (id)initWithTitle:(NSString *)titleString value:(NSNumber *)valueNumber
 {
-    self = [self initPieDataWithTitle:titleString value:valueNumber color:nil];
+    self = [self initWithTitle:titleString value:valueNumber color:nil];
     if(self)
     {
         
     }
     return self;
 }
-// 初期化(PIEチャート用)
-- (id)initPieDataWithTitle:(NSString *)titleString value:(NSNumber *)valueNumber color:(CTColor *)colorValue
+// 初期化
+- (id)initWithTitle:(NSString *)titleString value:(NSNumber *)valueNumber color:(CTColor *)colorValue
 {
     self = [super init];
     if(self)
     {
         [self setTitle:titleString];
-        [self setZValue:valueNumber];
+        [self setValue:valueNumber];
         [self setColor:colorValue];
         
     }
@@ -44,9 +44,9 @@
 
 - (NSString *)description
 {
-    return [NSString stringWithFormat:@"title = %@; zValue = %@; color = %@",
+    return [NSString stringWithFormat:@"title = %@; value = %@; color = %@",
             [self title],
-            [self zValue],
+            [self value],
             [self color]
             ];
 }

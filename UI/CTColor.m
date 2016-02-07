@@ -2,7 +2,7 @@
 //  CTColor.m
 //  CitrusTouch
 //
-//  Created by TAKEMOTO KOUHEI on 2012/10/01.
+//  Created by take64 on 2012/10/01.
 //  Copyright (c) 2012年 citrus.tk. All rights reserved.
 //
 
@@ -149,6 +149,39 @@
                              ];
     return colorString;
 }
+
+//// 色取得(赤)
+//- (CGFloat)colorRed
+//{
+//    CGColorRef cgcolor = [self CGColor];
+//    const CGFloat *colors;
+//    colors = CGColorGetComponents(cgcolor);
+//    return (CGFloat)colors[0];
+//}
+//// 色取得(緑)
+//- (CGFloat)colorGreen
+//{
+//    CGColorRef cgcolor = [self CGColor];
+//    const CGFloat *colors;
+//    colors = CGColorGetComponents(cgcolor);
+//    return colors[1];
+//}
+//// 色取得(青)
+//- (CGFloat)colorBlue
+//{
+//    CGColorRef cgcolor = [self CGColor];
+//    const CGFloat *colors;
+//    colors = CGColorGetComponents(cgcolor);
+//    return colors[2];
+//}
+//// 色取得(透)
+//- (CGFloat)colorAlpha
+//{
+//    CGColorRef cgcolor = [self CGColor];
+//    const CGFloat *colors;
+//    colors = CGColorGetComponents(cgcolor);
+//    return colors[3];
+//}
 
 - (NSString *)description
 {

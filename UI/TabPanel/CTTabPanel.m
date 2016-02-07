@@ -2,7 +2,7 @@
 //  CTTabPanel.m
 //  SocialGameTimer
 //
-//  Created by TAKEMOTO KOUHEI on 2013/03/23.
+//  Created by take64 on 2013/03/23.
 //  Copyright (c) 2013年 citrus.tk. All rights reserved.
 //
 
