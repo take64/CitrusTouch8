@@ -154,7 +154,7 @@
         {
             CGPoint point = CGPointMake((xOffset * count) + padding, rect.size.height - ((yOffset * [[chartData value] doubleValue]) + padding));
             
-            NSLog(@"x = %f; y = %f", point.x, point.y);
+//            NSLog(@"x = %f; y = %f", point.x, point.y);
             
             // 線描画
             if(CGPointEqualToPoint(fromPoint, CGPointZero) == NO)

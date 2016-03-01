@@ -1,6 +1,6 @@
 //
 //  CTImage.m
-//  PStamp
+//  CitrusTouch
 //
 //  Created by Take on 13/02/15.
 //  Copyright (c) 2013年 naissance sapporo. co., ltd. All rights reserved.

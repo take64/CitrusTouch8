@@ -1,6 +1,6 @@
 //
 //  CTCoreDataRequest.m
-//  PStamp
+//  CitrusTouch
 //
 //  Created by Take on 13/02/21.
 //  Copyright (c) 2013年 naissance sapporo. co., ltd. All rights reserved.
@@ -143,37 +143,37 @@
 }
 
 // count取得(1件)
-+ (NSNumber *) countWithContext:(NSManagedObjectContext *)context entityName:(NSString *)entityName columnName:(NSString *)columnName whereQuery:(NSString *)whereQuery whereParameters:(NSArray *)whereParameters
++ (id) countWithContext:(NSManagedObjectContext *)context entityName:(NSString *)entityName columnName:(NSString *)columnName whereQuery:(NSString *)whereQuery whereParameters:(NSArray *)whereParameters
 {
     return [CTCoreDataRequest functionWithContext:context entityName:entityName functionName:@"count:" columnName:columnName whereQuery:whereQuery whereParameters:whereParameters];
 }
 
 // max取得(1件)
-+ (NSNumber *) maxWithContext:(NSManagedObjectContext *)context entityName:(NSString *)entityName columnName:(NSString *)columnName whereQuery:(NSString *)whereQuery whereParameters:(NSArray *)whereParameters
++ (id) maxWithContext:(NSManagedObjectContext *)context entityName:(NSString *)entityName columnName:(NSString *)columnName whereQuery:(NSString *)whereQuery whereParameters:(NSArray *)whereParameters
 {
     return [CTCoreDataRequest functionWithContext:context entityName:entityName functionName:@"max:" columnName:columnName whereQuery:whereQuery whereParameters:whereParameters];
 }
 
 // min取得(1件)
-+ (NSNumber *) minWithContext:(NSManagedObjectContext *)context entityName:(NSString *)entityName columnName:(NSString *)columnName whereQuery:(NSString *)whereQuery whereParameters:(NSArray *)whereParameters
++ (id) minWithContext:(NSManagedObjectContext *)context entityName:(NSString *)entityName columnName:(NSString *)columnName whereQuery:(NSString *)whereQuery whereParameters:(NSArray *)whereParameters
 {
     return [CTCoreDataRequest functionWithContext:context entityName:entityName functionName:@"min:" columnName:columnName whereQuery:whereQuery whereParameters:whereParameters];
 }
 
 // average取得(1件)
-+ (NSNumber *) averageWithContext:(NSManagedObjectContext *)context entityName:(NSString *)entityName columnName:(NSString *)columnName whereQuery:(NSString *)whereQuery whereParameters:(NSArray *)whereParameters
++ (id) averageWithContext:(NSManagedObjectContext *)context entityName:(NSString *)entityName columnName:(NSString *)columnName whereQuery:(NSString *)whereQuery whereParameters:(NSArray *)whereParameters
 {
     return [CTCoreDataRequest functionWithContext:context entityName:entityName functionName:@"average:" columnName:columnName whereQuery:whereQuery whereParameters:whereParameters];
 }
 
 // sum取得(1件)
-+ (NSNumber *) sumWithContext:(NSManagedObjectContext *)context entityName:(NSString *)entityName columnName:(NSString *)columnName whereQuery:(NSString *)whereQuery whereParameters:(NSArray *)whereParameters
++ (id) sumWithContext:(NSManagedObjectContext *)context entityName:(NSString *)entityName columnName:(NSString *)columnName whereQuery:(NSString *)whereQuery whereParameters:(NSArray *)whereParameters
 {
     return [CTCoreDataRequest functionWithContext:context entityName:entityName functionName:@"sum:" columnName:columnName whereQuery:whereQuery whereParameters:whereParameters];
 }
 
 // 件数取得(1件)
-+ (NSNumber *) functionWithContext:(NSManagedObjectContext *)context entityName:(NSString *)entityName functionName:(NSString *)functionName columnName:(NSString *)columnName whereQuery:(NSString *)whereQuery whereParameters:(NSArray *)whereParameters
++ (id) functionWithContext:(NSManagedObjectContext *)context entityName:(NSString *)entityName functionName:(NSString *)functionName columnName:(NSString *)columnName whereQuery:(NSString *)whereQuery whereParameters:(NSArray *)whereParameters
 {
     // リクエスト
     NSFetchRequest *request = [[NSFetchRequest alloc] init];
