@@ -189,7 +189,7 @@
 //
 
 // 初期化
-- (id) initWithStyle:(UITableViewStyle)style title:(NSString *)titleValue parentController:(UIViewController *)parentController
+- (id) initWithStyle:(UITableViewStyle)style title:(NSString *)titleValue
 {
     // 編集テーブルビュー
     [self set_tableViewController:[[UITableViewController alloc] initWithStyle:style]];
@@ -200,8 +200,8 @@
         // タイトル
         [[self _tableViewController] setTitle:titleValue];
         
-        // 親コントローラー
-        [self set_parentController:parentController];
+//        // 親コントローラー
+//        [self set_parentController:parentController];
         
         // delegate
         [[[self _tableViewController] tableView] setDataSource:self];
@@ -232,33 +232,42 @@
         // リレーション
         [self setRelations:[NSMutableDictionary dictionaryWithCapacity:1]];
         
+        // ツールバー表示
+        [[[self _tableViewController] navigationController] setToolbarHidden:NO];
+        
         // 削除ボタン
-        [self setRemoveButton:[[CTButton alloc] initWithText:@"削除"]];
-        [[[self removeButton] callStyle] addStyleDictionary:@{
-                                                              @"top"             :@"0",
-                                                              @"left"            :@"0",
-                                                              @"width"           :@"160",
-                                                              @"height"          :@"64",
-                                                              @"font-size"       :@"20",
-                                                              @"font-weight"     :@"bold",
-                                                              @"text-shadow"     :@"0 -1 1 333333",
-                                                              @"background-color":@"FF0000",
-                                                              @"border-color"    :@"FFFFFF",
-                                                              @"border-width"    :@"1",
-                                                              @"border-radius"   :@"8",
-                                                              @"margin"          :@"4 12 12 12",
-                                                              @"box-shadow"      :@"0 1 4 000000",
-                                                              @"background-image":@"linear-gradient(rgba(1.00, 1.00, 1.00, 0.75) 0.00, rgba(0.75, 0.75, 0.75, 0.50) 0.05, rgba(0.50, 0.50, 0.50, 0.50) 0.95, rgba(0.25, 0.25, 0.25, 0.75) 1.00)",
-         }];
-        [[[self removeButton] callStyleHighlighted] addStyleDictionary:@{
-                                                                         @"background-image":@"linear-gradient(rgba(0.10, 0.10, 0.10, 0.90) 0.00, rgba(0.10, 0.10, 0.10, 0.50) 0.05, rgba(0.10, 0.10, 0.10, 0.50) 0.95, rgba(0.10, 0.10, 0.10, 0.90) 1.00)",
-         }];
-        [[[self removeButton] callStyleDisabled] addStyleDictionary:@{
-                                                                      @"background-color":@"666666",
-                                                                      @"background-image":@"linear-gradient(rgba(0.10, 0.10, 0.10, 0.90) 0.00, rgba(0.10, 0.10, 0.10, 0.50) 0.05, rgba(0.10, 0.10, 0.10, 0.50) 0.95, rgba(0.10, 0.10, 0.10, 0.90) 1.00)",
-                                                                         }];
-        [[self _tableView] setTableFooterView:[self removeButton]];
-        [[self removeButton] addTarget:self action:@selector(onTapButtonRemove) forControlEvents:UIControlEventTouchUpInside];
+        UIBarButtonItem *button = [[UIBarButtonItem alloc] initWithTitle:@"削除" style:UIBarButtonItemStyleDone target:self action:@selector(onTapButtonRemove)];
+        [button setTintColor:[UIColor redColor]];
+        [[self _tableViewController] setToolbarItems:@[ button ]];
+        [self setRemoveButton:button];
+        
+//        // 削除ボタン
+//        [self setRemoveButton:[[CTButton alloc] initWithText:@"削除"]];
+//        [[[self removeButton] callStyle] addStyleDictionary:@{
+//                                                              @"top"             :@"0",
+//                                                              @"left"            :@"0",
+//                                                              @"width"           :@"160",
+//                                                              @"height"          :@"64",
+//                                                              @"font-size"       :@"20",
+//                                                              @"font-weight"     :@"bold",
+//                                                              @"text-shadow"     :@"0 -1 1 333333",
+//                                                              @"background-color":@"FF0000",
+//                                                              @"border-color"    :@"FFFFFF",
+//                                                              @"border-width"    :@"1",
+//                                                              @"border-radius"   :@"8",
+//                                                              @"margin"          :@"4 12 12 12",
+//                                                              @"box-shadow"      :@"0 1 4 000000",
+//                                                              @"background-image":@"linear-gradient(rgba(1.00, 1.00, 1.00, 0.75) 0.00, rgba(0.75, 0.75, 0.75, 0.50) 0.05, rgba(0.50, 0.50, 0.50, 0.50) 0.95, rgba(0.25, 0.25, 0.25, 0.75) 1.00)",
+//         }];
+//        [[[self removeButton] callStyleHighlighted] addStyleDictionary:@{
+//                                                                         @"background-image":@"linear-gradient(rgba(0.10, 0.10, 0.10, 0.90) 0.00, rgba(0.10, 0.10, 0.10, 0.50) 0.05, rgba(0.10, 0.10, 0.10, 0.50) 0.95, rgba(0.10, 0.10, 0.10, 0.90) 1.00)",
+//         }];
+//        [[[self removeButton] callStyleDisabled] addStyleDictionary:@{
+//                                                                      @"background-color":@"666666",
+//                                                                      @"background-image":@"linear-gradient(rgba(0.10, 0.10, 0.10, 0.90) 0.00, rgba(0.10, 0.10, 0.10, 0.50) 0.05, rgba(0.10, 0.10, 0.10, 0.50) 0.95, rgba(0.10, 0.10, 0.10, 0.90) 1.00)",
+//                                                                         }];
+//        [[self _tableView] setTableFooterView:[self removeButton]];
+//        [[self removeButton] addTarget:self action:@selector(onTapButtonRemove) forControlEvents:UIControlEventTouchUpInside];
         
         // 削除確認
         [self setRemoveActionSheet:[[UIActionSheet alloc] initWithTitle:@"削除します。よろしいですか？" delegate:self cancelButtonTitle:@"キャンセル" destructiveButtonTitle:@"削除" otherButtonTitles:nil, nil]];

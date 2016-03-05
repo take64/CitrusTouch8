@@ -15,8 +15,8 @@ typedef void (^CTModalComplete)(id modal);
 
 @interface CTModal : UINavigationController
 {
-    // 親コントローラー
-    UIViewController *_parentController;
+//    // 親コントローラー
+//    UIViewController *_parentController;
     
     // 画面閉じ完了
     CTModalComplete modalComplete;
@@ -28,7 +28,7 @@ typedef void (^CTModalComplete)(id modal);
 //
 // property
 //
-@property (nonatomic, retain) UIViewController *_parentController;
+//@property (nonatomic, retain) UIViewController *_parentController;
 @property (nonatomic, copy) CTModalComplete modalComplete;
 
 //
@@ -36,9 +36,9 @@ typedef void (^CTModalComplete)(id modal);
 //
 
 // 表示
-- (void) show;
+- (void) showWithParent:(UIViewController *)parent;
 // 表示
-- (void) showWithComplete:(CTModalComplete)complete;
+- (void) showWithParent:(UIViewController *)parent complete:(CTModalComplete)complete;
 // 非表示
 - (void) hide;
 

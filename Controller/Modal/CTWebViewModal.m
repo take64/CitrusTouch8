@@ -49,8 +49,8 @@
     self = [super initWithRootViewController:[self _viewController]];
     if(self)
     {
-        // 親コントローラー
-        [self set_parentController:parentController];
+//        // 親コントローラー
+//        [self set_parentController:parentController];
         
         // インジケーター
         [self setProgressView:[[UIProgressView alloc] initWithProgressViewStyle:UIProgressViewStyleBar]];

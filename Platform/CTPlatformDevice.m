@@ -63,13 +63,15 @@
 // プラットフォームを取得
 + (NSString *) platform
 {
-    return [CTPlatformDevice getSystemInfByName:"hw.machine"];
+//    return [CTPlatformDevice getSystemInfByName:"hw.machine"];
+    return [[UIDevice currentDevice] model];
 }
 
 // モデルを取得
 + (NSString *) model
 {
-    return [CTPlatformDevice getSystemInfByName:"hw.model"];
+//    return [CTPlatformDevice getSystemInfByName:"hw.model"];
+    return [[UIDevice currentDevice] model];
 }
 
 // システム情報取得

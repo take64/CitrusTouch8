@@ -31,7 +31,7 @@
     NSMutableDictionary *relations;
     
     // 削除ボタン
-    CTButton *removeButton;
+    UIBarButtonItem *removeButton;
     
     // 削除確認アクションシート
     UIActionSheet *removeActionSheet;
@@ -52,7 +52,7 @@
 @property (nonatomic, retain) NSMutableDictionary *datastore;
 @property (nonatomic, retain) NSMutableDictionary *temporary;
 @property (nonatomic, retain) NSMutableDictionary *relations;
-@property (nonatomic, retain) CTButton *removeButton;
+@property (nonatomic, retain) UIBarButtonItem *removeButton;
 @property (nonatomic, retain) UIActionSheet *removeActionSheet;
 @property (nonatomic, retain) NSMutableDictionary *headViewCaches;
 @property (nonatomic, retain) NSMutableDictionary *footViewCaches;
@@ -65,7 +65,7 @@
 //
 
 // 初期化
-- (id) initWithStyle:(UITableViewStyle)style title:(NSString *)titleValue parentController:(UIViewController *)parentController;
+- (id) initWithStyle:(UITableViewStyle)style title:(NSString *)titleValue;
 
 // 保存
 - (void) onTapButtonSave;

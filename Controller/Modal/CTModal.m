@@ -17,7 +17,7 @@
 //
 // synthesize
 //
-@synthesize _parentController;
+//@synthesize _parentController;
 @synthesize modalComplete;
 
 
@@ -41,20 +41,20 @@
 
 
 // 表示
-- (void) show
+- (void) showWithParent:(UIViewController *)parent
 {
-    if([self _parentController] != nil)
+    if(parent != nil)
     {
-        [[self _parentController] presentViewController:self animated:YES completion:nil];
+        [parent presentViewController:self animated:YES completion:nil];
     }
 }
 // 表示
-- (void) showWithComplete:(CTModalComplete)complete
+- (void) showWithParent:(UIViewController *)parent complete:(CTModalComplete)complete
 {
     // 画面閉じ完了
     [self setModalComplete:complete];
     // 表示
-    [self show];
+    [self showWithParent:parent];
 }
 // 非表示
 - (void) hide

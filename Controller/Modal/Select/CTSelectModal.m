@@ -132,8 +132,8 @@
     self = [super initWithRootViewController:[self _tableViewController]];
     if(self)
     {
-        // 親コントローラー
-        [self set_parentController:parentController];
+//        // 親コントローラー
+//        [self set_parentController:parentController];
         
         // delegate
         [[[self _tableViewController] tableView] setDataSource:self];

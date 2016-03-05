@@ -34,11 +34,11 @@
     // 削除ボタン表示
     if([self entity] != nil)
     {
-        [[self removeButton] setHidden:NO];
+        [[self removeButton] setEnabled:YES];
     }
     else
     {
-        [[self removeButton] setHidden:YES];
+        [[self removeButton] setEnabled:NO];
     }
     
     [super viewWillAppear:animated];

@@ -8,10 +8,11 @@
 
 #import <UIKit/UIKit.h>
 
-@interface CTTableCellSegmentedControl : UITableViewCell
+@interface CTTableCellSegmentedControl : CTTableCell
 {
     // 選択データ
-    NSDictionary *_data;
+    NSArray *_keys;
+    NSArray *_vals;
     
     // セグメントコントロール
     UISegmentedControl *_segmentedControl;
@@ -23,7 +24,8 @@
 //
 // property
 //
-@property (nonatomic, retain) NSDictionary *_data;
+@property (nonatomic, retain) NSArray *_keys;
+@property (nonatomic, retain) NSArray *_vals;
 @property (nonatomic, retain) UISegmentedControl *_segmentedControl;
 @property (nonatomic) BOOL _isLayout;
 
@@ -33,14 +35,17 @@
 // method
 //
 
-// 初期化
-- (id)initWithReuseIdentifier:(NSString *)reuseIdentifier;
+// データ当て込み
+- (void) bindDataKeys:(NSArray *)keys vals:(NSArray *)vals;
 
 // データ当て込み
-- (void) bindData:(NSDictionary *)data;
+- (void) bindData:(NSArray *)datas;
 
 // 選択中のキーを取得
 - (id) selectedKey;
+
+// 選択中の値を取得
+- (id) selectedValue;
 
 // 選択設定
 - (void) setSelectedSegmentIndex:(NSInteger)index;
@@ -48,7 +53,7 @@
 // 選択設定
 - (void) setSelectedKey:(id)key;
 
-// ターゲット
-- (void)addTarget:(id)target action:(SEL)action forControlEvents:(UIControlEvents)controlEvents;
+// イベント設定
+- (void)addTarget:(id)idValue action:(SEL)selValue forControlEvents:(UIControlEvents)controlEventsValue;
 
 @end

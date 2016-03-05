@@ -109,9 +109,10 @@ static const NSString *NSManagedObjectContextThreadKey = @"NSManagedObjectContex
     NSURL *storeURL = [[[[NSFileManager defaultManager] URLsForDirectory:NSDocumentDirectory inDomains:NSUserDomainMask] lastObject] URLByAppendingPathComponent:[self _storePath]];
     
     
-    NSDictionary *options = [NSDictionary dictionaryWithObjectsAndKeys:
-                             [NSNumber numberWithBool:YES], NSMigratePersistentStoresAutomaticallyOption,
-                             [NSNumber numberWithBool:YES], NSInferMappingModelAutomaticallyOption, nil];
+    NSDictionary *options = @{NSSQLitePragmasOption:@{@"journal_mode":@"DELETE"},
+                              NSMigratePersistentStoresAutomaticallyOption:@YES,
+                              NSInferMappingModelAutomaticallyOption:@YES,
+                              };
     
     NSError *error = nil;
     [self set_persistentStoreCoordinator:
