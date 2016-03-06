@@ -19,5 +19,7 @@
 // entity配列のdictionary配列化
 + (NSArray *)dictionariesWithEntities:(NSArray *)entities;
 
+// dictionary配列からentityに変換
++ (NSManagedObject *)entityWithEntity:(NSManagedObject *)entityValue withDictionary:(NSDictionary *)dicValue;
 
 @end

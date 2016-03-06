@@ -72,5 +72,39 @@
     return [results copy];
 }
 
+// dictionary配列からentityに変換
++ (NSManagedObject *)entityWithEntity:(NSManagedObject *)entityValue withDictionary:(NSDictionary *)dicValue
+{
+    if(dicValue == nil)
+    {
+        return entityValue;
+    }
+    
+    // カラム名リスト
+    NSDictionary *columns = [[entityValue entity] propertiesByName];
+    for(NSString *column in columns)
+    {
+        NSPropertyDescription *property = [columns objectForKey:column];
+        if([property isKindOfClass:[NSAttributeDescription class]] == YES)
+        {
+            if([(NSAttributeDescription *)property isTransient] == NO)
+            {
+                NSString *className = [(NSAttributeDescription *)property attributeValueClassName];
+                id value = [dicValue objectForKey:column];
+                if([className isEqualToString:@"NSDate"] == YES)
+                {
+                    [entityValue setValue:[CTDate stringWithDate:value format:@"yyyyMMddHHmmss"] forKey:column];
+                }
+                else
+                {
+                    [entityValue setValue:value forKey:column];
+                }
+            }
+        }
+        
+    }
+    return entityValue;
+}
+
 
 @end

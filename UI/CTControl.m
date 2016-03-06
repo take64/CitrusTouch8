@@ -463,15 +463,39 @@
         
         
         // フォント計算
-        UIFont *font = [stylesheet callFont];
-        [attributes addEntriesFromDictionary:@{NSFontAttributeName:font}];
-//        CGSize fontBounds = [[self text] sizeWithFont:font constrainedToSize:paddedContentRect.size lineBreakMode:lineBreakMode];
-        CGSize fontBounds = [[self text] boundingRectWithSize:paddedContentRect.size options:(NSStringDrawingUsesLineFragmentOrigin | NSStringDrawingTruncatesLastVisibleLine) attributes:attributes context:nil].size;
-//        fontBounds.height = ceil((double)fontBounds.width / paddedContentRect.size.width) * fontBounds.height;
-        fontBounds.width = paddedContentRect.size.width;
-        if(fontBounds.height > paddedContentRect.size.height)
+        UIFont *font;
+        CGSize fontBounds;
+        if([[stylesheet callStyleKey:@"adjust-font"] isEqualToString:@"true"] == YES)
         {
-            fontBounds.height = paddedContentRect.size.height;
+            BOOL adjust = NO;
+            while (adjust == NO)
+            {
+                font = [stylesheet callFont];
+                [attributes addEntriesFromDictionary:@{NSFontAttributeName:font}];
+                fontBounds = [[self text] boundingRectWithSize:CGSizeMake(paddedContentRect.size.width, CGFLOAT_MAX) options:(NSStringDrawingUsesLineFragmentOrigin | NSStringDrawingTruncatesLastVisibleLine) attributes:attributes context:nil].size;
+                fontBounds.width = paddedContentRect.size.width;
+                if(fontBounds.height > paddedContentRect.size.height)
+                {
+                    fontBounds.height = paddedContentRect.size.height;
+                    
+                    [stylesheet addStyleKey:@"font-size" value:[@([[stylesheet callStyleKey:@"font-size"] doubleValue] - 1) stringValue]];
+                }
+                else
+                {
+                    adjust = YES;
+                }
+            }
+        }
+        else
+        {
+            font = [stylesheet callFont];
+            [attributes addEntriesFromDictionary:@{NSFontAttributeName:font}];
+            fontBounds = [[self text] boundingRectWithSize:paddedContentRect.size options:(NSStringDrawingUsesLineFragmentOrigin | NSStringDrawingTruncatesLastVisibleLine) attributes:attributes context:nil].size;
+            fontBounds.width = paddedContentRect.size.width;
+            if(fontBounds.height > paddedContentRect.size.height)
+            {
+                fontBounds.height = paddedContentRect.size.height;
+            }
         }
         
         
