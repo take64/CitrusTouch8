@@ -135,7 +135,13 @@
     }
 }
 
-//- (void)restClient:(DBRestClient*)client loadFileFailedWithError:(NSError*)error;
+- (void)restClient:(DBRestClient*)client loadFileFailedWithError:(NSError*)error
+{
+    if([error code] == 404)
+    {
+        self.completeBlock(nil, error);
+    }
+}
 //// [error userInfo] contains the destinationPath
 //
 //

@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 
 
-typedef void (^CTModalComplete)(id modal);
+typedef void (^CTModalComplete)(id object);
 
 @class CTColor;
 

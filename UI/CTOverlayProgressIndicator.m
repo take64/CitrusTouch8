@@ -211,6 +211,7 @@
     }
     else
     {
+        usleep(50000);
         [[self progressBar] setProgress:progress animated:YES];
     }
     

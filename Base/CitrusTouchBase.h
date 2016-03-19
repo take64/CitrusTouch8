@@ -15,6 +15,7 @@
 #import "CTString.h"
 #import "CTCrypt.h"
 #import "CTRegexp.h"
+#import "CTMath.h"
 
 #import "CTSectionDatastore.h"
 #import "CTCollection.h"

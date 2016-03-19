@@ -15,30 +15,30 @@
 @implementation CTSelectColorModal
 
 // 初期化
-- (id) initWithStyle:(UITableViewStyle)style title:(NSString *)titleValue parentController:(UIViewController *)parentController
+- (id) initWithStyle:(UITableViewStyle)style title:(NSString *)titleValue
 {
-    self = [super initWithStyle:style title:titleValue parentController:parentController];
+    self = [super initWithStyle:style title:titleValue];
     if(self)
     {
         [self setKeyList:[@[
                             @[
-                                @"FF0000",
-                                @"FF9900",
+                                @"CC6666",
+                                @"CC9966",
                                 
-                                @"FFFF00",
-                                @"99FF00",
+                                @"CCCC66",
+                                @"99CC66",
                                 
-                                @"00FF00",
-                                @"00FF99",
+                                @"66CC66",
+                                @"66CC99",
                                 
-                                @"00FFFF",
-                                @"0099FF",
+                                @"66CCCC",
+                                @"6699CC",
                                 
-                                @"0000FF",
-                                @"9900FF",
+                                @"6666CC",
+                                @"9966CC",
                                 
-                                @"FF00FF",
-                                @"FF0099",
+                                @"CC66CC",
+                                @"CC6699",
                                 ]
                             ] mutableCopy]];
     }

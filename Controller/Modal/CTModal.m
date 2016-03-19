@@ -61,7 +61,7 @@
 {
     [self dismissViewControllerAnimated:YES completion:^(void){
         // 画面閉じ完了がある場合
-        if([self modalComplete] != nil)
+        if(self.modalComplete != nil)
         {
             self.modalComplete(self);
         }

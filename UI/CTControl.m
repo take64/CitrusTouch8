@@ -478,7 +478,7 @@
                 {
                     fontBounds.height = paddedContentRect.size.height;
                     
-                    [stylesheet addStyleKey:@"font-size" value:[@([[stylesheet callStyleKey:@"font-size"] doubleValue] - 1) stringValue]];
+                    [stylesheet addStyleKey:@"font-size" value:[@([[stylesheet callStyleKey:@"font-size"] doubleValue] - 0.5) stringValue]];
                 }
                 else
                 {

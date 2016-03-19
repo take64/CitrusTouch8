@@ -10,6 +10,8 @@
 #import <UIKit/UIKit.h>
 #import <CoreGraphics/CoreGraphics.h>
 
+#define CTStringf(format,...) [NSString stringWithFormat:format,##__VA_ARGS__]
+
 @interface CTString : NSObject
 
 

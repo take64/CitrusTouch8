@@ -127,7 +127,7 @@
 //
 
 // 初期化
-- (id) initWithStyle:(UITableViewStyle)style title:(NSString *)titleValue parentController:(UIViewController *)parentController
+- (id) initWithStyle:(UITableViewStyle)style title:(NSString *)titleValue
 {
     // 編集テーブルビュー
     [self set_tableViewController:[[UITableViewController alloc] initWithStyle:style]];

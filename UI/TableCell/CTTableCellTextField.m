@@ -71,7 +71,18 @@
 }
 //- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string;
 //- (BOOL)textFieldShouldClear:(UITextField *)textField;
-//- (BOOL)textFieldShouldReturn:(UITextField *)textField;
+- (BOOL)textFieldShouldReturn:(UITextField *)textField
+{
+    if([self nextCell] != nil && [[self nextCell] responder] != nil && [[[self nextCell] responder] canBecomeFirstResponder] == YES)
+    {
+        [[[self nextCell] responder] becomeFirstResponder];
+    }
+    else
+    {
+        [[self responder] resignFirstResponder];
+    }
+    return YES;
+}
 
 
 

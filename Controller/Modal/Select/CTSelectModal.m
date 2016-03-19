@@ -112,19 +112,7 @@
 //
 
 // 初期化
-- (id) initWithStyle:(UITableViewStyle)style title:(NSString *)titleValue parentController:(UIViewController *)parentController
-{
-    self = [self initWithStyleParentController:parentController];
-    if(self)
-    {
-        // タイトル
-        [[self _tableViewController] setTitle:titleValue];
-    }
-    return self;
-}
-
-// 初期化
-- (id) initWithStyleParentController:(UIViewController *)parentController
+- (id) initWithStyle:(UITableViewStyle)style title:(NSString *)titleValue
 {
     // 編集テーブルビュー
     [self set_tableViewController:[[UITableViewController alloc] initWithStyle:UITableViewStylePlain]];
@@ -132,8 +120,8 @@
     self = [super initWithRootViewController:[self _tableViewController]];
     if(self)
     {
-//        // 親コントローラー
-//        [self set_parentController:parentController];
+        // タイトル
+        [[self _tableViewController] setTitle:titleValue];
         
         // delegate
         [[[self _tableViewController] tableView] setDataSource:self];

@@ -75,7 +75,11 @@
 {
     return [[[self callFetchedResultsController] sections] count];
 }
-//- (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section;
+- (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section
+{
+    id <NSFetchedResultsSectionInfo> sectionInfo = [[[self callFetchedResultsController] sections] objectAtIndex:section];
+    return [sectionInfo name];
+}
 //- (NSString *)tableView:(UITableView *)tableView titleForFooterInSection:(NSInteger)section;
 //- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath;
 //- (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath;
@@ -142,7 +146,7 @@
 //
 
 // 初期化
-- (id) initWithStyle:(UITableViewStyle)style title:(NSString *)titleValue parentController:(UIViewController *)parentController
+- (id) initWithStyle:(UITableViewStyle)style title:(NSString *)titleValue
 {
     // 編集テーブルビュー
     [self set_tableViewController:[[UITableViewController alloc] initWithStyle:style]];

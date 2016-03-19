@@ -44,7 +44,12 @@
         [[self textField] setEnableMenu:NO];
         
         // パッキングビュー
-        [self setInputPackingView:[[UIView alloc] initWithFrame:CGRectMake(0, 0, 320, 216)]];
+        CGFloat width = 320;
+        if([CTPlatformDevice isIPad] == YES)
+        {
+            width = 1024;
+        }
+        [self setInputPackingView:[[UIView alloc] initWithFrame:CGRectMake(0, 0, width, 216)]];
         [[self inputPackingView] setBackgroundColor:[CTColor colorWithHEXString:@"999999"]];
         
         // ピッカーモード
@@ -87,6 +92,7 @@
         
         // 位置変更
         [[self datePicker] setFrame:CGRectMake(0, 0, 320, 216)];
+        [[self datePicker] setCenter:[[self inputPackingView] center]];
         
         // 配置
         [[self inputPackingView] addSubview:[self datePicker]];
@@ -98,6 +104,7 @@
     {
         // 位置変更
         [[self datePicker] setFrame:CGRectMake(0, 32, 320, 216)];
+        [[self datePicker] setCenter:[[self inputPackingView] center]];
         
         // パッキングビュー
         [[self inputPackingView] setFrame:CGRectMake(0, 0, 320, 248)];
@@ -159,9 +166,14 @@
         
         for(NSDictionary *buttonProperty in buttonProperties)
         {
+            CGFloat left = [[buttonProperty objectForKey:@"left"] floatValue];
+            if([CTPlatformDevice isIPad] == YES)
+            {
+                left += ((1024 - 320) / 2);
+            }
             CTButton *buttonTime = [[CTButton alloc] initWithText:[buttonProperty objectForKey:@"title"]];
             [buttonTime setStyle:buttonStyle];
-            [[buttonTime callStyleNormal] addStyleKey:@"left" value:[buttonProperty objectForKey:@"left"]];
+            [[buttonTime callStyleNormal] addStyleKey:@"left" value:[@(left) stringValue]];
             [[buttonTime callStyleNormal] addStyleKey:@"width" value:[buttonProperty objectForKey:@"width"]];
             [[buttonTime callStyleHighlighted] addStyleDictionary:[buttonStyleHighlighed callAllStyles]];
             [buttonTime setUserInfo:[NSMutableDictionary dictionaryWithObject:[buttonProperty objectForKey:@"time"] forKey:@"time"]];
@@ -179,6 +191,12 @@
 // 設定(日付)
 - (void) setDate:(NSDate *)dateValue
 {
+    if([dateValue isEqual:[NSNull null]] == YES)
+    {
+        [self setContentText:@""];
+        return ;
+    }
+    
     [[self datePicker] setDate:dateValue];
     
     if([self dateFormatter] != nil)
@@ -193,8 +211,7 @@
 }
 
 
-#pragma mark -
-#pragma mark private
+#pragma mark - private
 //
 // private
 //

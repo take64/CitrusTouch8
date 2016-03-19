@@ -44,8 +44,6 @@
 //
 
 // 初期化
-- (id) initWithStyle:(UITableViewStyle)style title:(NSString *)titleValue parentController:(UIViewController *)parentController;
+- (id) initWithStyle:(UITableViewStyle)style title:(NSString *)titleValue;
 
-// 初期化
-- (id) initWithStyleParentController:(UIViewController *)parentController;
 @end

@@ -91,9 +91,15 @@
             {
                 NSString *className = [(NSAttributeDescription *)property attributeValueClassName];
                 id value = [dicValue objectForKey:column];
+                if([value isEqual:[NSNull null]] == YES)
+                {
+                    continue;
+                }
                 if([className isEqualToString:@"NSDate"] == YES)
                 {
-                    [entityValue setValue:[CTDate stringWithDate:value format:@"yyyyMMddHHmmss"] forKey:column];
+                    [entityValue setValue:
+                     [CTDate dateWithString:value format:@"yyyyMMddHHmmss"]
+                                   forKey:column];
                 }
                 else
                 {
