@@ -19,6 +19,7 @@
 //
 @synthesize keyList;
 @synthesize keyDict;
+@synthesize selectedKey;
 
 // 初期化
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
@@ -52,7 +53,34 @@
 {
     return [(NSArray *)[[self keyList] objectAtIndex:section] count];
 }
-//- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath;
+// セルを返す
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    static NSString *CellId = @"CellId";
+    
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellId];
+    if(cell == nil)
+    {
+        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellId];
+    }
+    if(cell != nil)
+    {
+        NSInteger section   = [indexPath section];
+        NSInteger row       = [indexPath row];
+        id _selectedKey = [[[self keyList] objectAtIndex:section] objectAtIndex:row];
+        
+        NSString *valString = [[self keyDict] objectForKey:_selectedKey];
+        [[cell textLabel] setText:valString];
+        
+        [cell setAccessoryType:UITableViewCellAccessoryNone];
+        if([[self selectedList] containsObject:_selectedKey] == YES)
+        {
+            [cell setAccessoryType:UITableViewCellAccessoryCheckmark];
+        }
+        
+    }
+    return cell;
+}
 // セクション数
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
@@ -98,10 +126,10 @@
 {
     NSInteger section   = [indexPath section];
     NSInteger row       = [indexPath row];
-    id selectedObject = [[[self keyList] objectAtIndex:section] objectAtIndex:row];
+    id _selectedKey = [[[self keyList] objectAtIndex:section] objectAtIndex:row];
     if([self modalComplete] != nil)
     {
-        self.modalComplete(selectedObject);
+        self.modalComplete(_selectedKey);
     }
     [self hide];
 }
@@ -153,6 +181,15 @@
         [[[self _tableViewController] navigationItem] setLeftBarButtonItem:buttonClose];
     }
     return self;
+}
+
+// データ読み込み
+- (void)loadSelectData:(NSMutableArray<NSMutableArray *> *)_keyList keyValue:(NSMutableDictionary *)_keyDict
+{
+    [self setKeyList:_keyList];
+    [self setKeyDict:_keyDict];
+    
+    [[self _tableView] reloadData];
 }
 
 @end

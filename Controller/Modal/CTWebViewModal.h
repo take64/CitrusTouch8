@@ -50,7 +50,7 @@
 //
 
 // 初期化
-- (id) initWithParentController:(UIViewController *)parentController;
+- (id) initWithDefault;
 
 // URL読み込み
 - (void)loadURL:(NSString *)urlString;

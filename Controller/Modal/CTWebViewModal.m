@@ -41,7 +41,7 @@
 //
 
 // 初期化
-- (id) initWithParentController:(UIViewController *)parentController
+- (id) initWithDefault
 {
     // 編集テーブルビュー
     [self set_viewController:[[UIViewController alloc] initWithNibName:nil bundle:nil]];
@@ -49,9 +49,6 @@
     self = [super initWithRootViewController:[self _viewController]];
     if(self)
     {
-//        // 親コントローラー
-//        [self set_parentController:parentController];
-        
         // インジケーター
         [self setProgressView:[[UIProgressView alloc] initWithProgressViewStyle:UIProgressViewStyleBar]];
         [[self progressView] setFrame:CGRectMake(0, [[self navigationBar] frame].size.height - 2.5, [[self navigationBar] frame].size.width, 2.5)];
@@ -65,7 +62,9 @@
         
         // ボタン
         UIBarButtonItem *button;
-        NSMutableArray *toolbarItems = [NSMutableArray array];
+        
+        // ボタン(スペーサー)
+        UIBarButtonItem *spacer = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil];
         
         // ボタン(閉じる)
         button = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemStop target:self action:@selector(hide)];
@@ -74,19 +73,24 @@
         // ボタン(戻る)
         button = [[UIBarButtonItem alloc] initWithTitle:@"◀︎" style:UIBarButtonItemStylePlain target:self action:@selector(onTapBarButtonPrev)];
         [self setPrevButton:button];
-        [toolbarItems addObject:button];
         
         // ボタン(進む)
         button = [[UIBarButtonItem alloc] initWithTitle:@"▶︎" style:UIBarButtonItemStylePlain target:self action:@selector(onTapBarButtonNext)];
         [self setNextButton:button];
-        [toolbarItems addObject:button];
         
         // ボタン(再読み込み)
         button = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemRefresh target:self action:@selector(onTapBarButtonReload)];
         [self setReloadButton:button];
-        [toolbarItems addObject:button];
         
-        [[self _viewController] setToolbarItems:toolbarItems];
+        [[self _viewController] setToolbarItems:@[
+                                                  spacer,
+                                                  [self prevButton],
+                                                  spacer,
+                                                  [self nextButton],
+                                                  spacer,
+                                                  [self reloadButton],
+                                                  spacer,
+                                                  ]];
         
         
         

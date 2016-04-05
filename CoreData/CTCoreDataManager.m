@@ -133,6 +133,9 @@ static const NSString *NSManagedObjectContextThreadKey = @"NSManagedObjectContex
     NSManagedObjectContext *context = [self managedObjectContextForCurrentThread];
     BOOL isMainThread = [[NSThread currentThread] isMainThread];
     
+    // 返却値
+    BOOL result;
+    
     // メインスレッドでない場合は通知する
     if(isMainThread == NO)
     {
@@ -140,17 +143,25 @@ static const NSString *NSManagedObjectContextThreadKey = @"NSManagedObjectContex
                                                  selector:@selector(managedObjectContextDidSave:)
                                                      name:NSManagedObjectContextDidSaveNotification
                                                    object:context];
-    }
     
-    // 保存処理
-    BOOL result = [context save:nil];
     
-    // 通知削除
-    if(isMainThread == NO)
-    {
+        // 保存処理
+        NSError *error;
+        result = [context save:&error];
+        if(error != nil)
+        {
+            NSLog(@"error : %@", error);
+        }
+    
+        // 通知削除
         [[NSNotificationCenter defaultCenter] removeObserver:self
                                                         name:NSManagedObjectContextDidSaveNotification
                                                       object:context];
+    }
+    else
+    {
+        // 保存処理
+        result = [context save:nil];
     }
     
     return result;

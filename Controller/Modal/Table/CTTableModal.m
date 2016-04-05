@@ -228,4 +228,15 @@
     [[self _alertMessage] show];
 }
 
+// 保存
+- (void) onTapButtonSave
+{
+    
+}
+// 削除
+- (void) onTapButtonRemove
+{
+    
+}
+
 @end

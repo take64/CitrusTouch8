@@ -11,14 +11,22 @@
 @interface CTSelectKeyModal : CTSelectModal <UITableViewDelegate, UITableViewDataSource, NSFetchedResultsControllerDelegate>
 {
     // データ
-    NSMutableArray *keyList;        // keyの多重配列
-    NSMutableDictionary *keyDict;   // key辞書
+    NSMutableArray<NSMutableArray *> *keyList;  // keyの多重配列
+    NSMutableDictionary *keyDict;               // key辞書
 }
 
 //
 // property
 //
-@property (nonatomic, retain) NSMutableArray *keyList;
+@property (nonatomic, retain) NSMutableArray<NSMutableArray *> *keyList;
 @property (nonatomic, retain) NSMutableDictionary *keyDict;
+@property (nonatomic, retain) id selectedKey;
+
+//
+// method
+//
+
+// データ読み込み
+- (void)loadSelectData:(NSMutableArray<NSMutableArray *> *)_keyList keyValue:(NSMutableDictionary *)_keyDict;
 
 @end
