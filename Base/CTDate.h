@@ -69,6 +69,12 @@
 // 日付の取得
 + (NSDate *)dateWithYear:(NSInteger)year month:(NSInteger)month day:(NSInteger)day hour:(NSInteger)hour minute:(NSInteger)minute second:(NSInteger)second;
 
+// 前月の月初めを取得
++ (NSDate *)prevMonthFirstDateWithDate:(NSDate *)dateValue;
+
+// 翌月の月初めを取得
++ (NSDate *)nextMonthFirstDateWithDate:(NSDate *)dateValue;
+
 //// 月の終わりを取得
 //+ (NSDate *)monthLastWithDate:(NSDate *)dateValue;
 

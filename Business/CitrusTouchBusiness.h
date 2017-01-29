@@ -10,5 +10,6 @@
 #define CitrusTouch_CitrusTouchBusiness_h
 
 #import "CTBusinessService.h"
+#import "CTBusinessElement.h"
 
 #endif

@@ -83,7 +83,7 @@
     }
     @catch (NSException *exception)
     {
-        NSLog(@"%@", exception);
+        CTLog(@"%@", exception);
     }
     @finally {}
     return name;
@@ -103,7 +103,7 @@
     }
     @catch (NSException *exception)
     {
-        NSLog(@"%@", exception);
+        CTLog(@"%@", exception);
     }
     @finally {}
     return result;
@@ -128,7 +128,6 @@
 // 初期化
 - (void) empty
 {
-    NSLog(@"section : empty");
     [self setNames:     [NSMutableArray arrayWithCapacity:1]];
     [self setObjects:   [NSMutableDictionary dictionaryWithCapacity:1]];
 }

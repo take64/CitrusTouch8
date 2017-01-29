@@ -154,7 +154,7 @@
     
     switch (navigationAction.navigationType) {
         case WKNavigationTypeLinkActivated: {
-            NSLog(@"WKNavigationTypeLinkActivated::");
+            CTLog(@"WKNavigationTypeLinkActivated::");
             // <a href="..." target="_blank"> が押されたとき
             if (targetFrame == nil)
             {
@@ -164,27 +164,27 @@
             break;
         }
         case WKNavigationTypeFormSubmitted: {
-            NSLog(@"WKNavigationTypeFormSubmitted::");
+            CTLog(@"WKNavigationTypeFormSubmitted::");
             
             break;
         }
         case WKNavigationTypeBackForward: {
-            NSLog(@"WKNavigationTypeBackForward::");
+            CTLog(@"WKNavigationTypeBackForward::");
             
             break;
         }
         case WKNavigationTypeReload: {
-            NSLog(@"WKNavigationTypeReload::");
+            CTLog(@"WKNavigationTypeReload::");
             
             break;
         }
         case WKNavigationTypeFormResubmitted: {
-            NSLog(@"WKNavigationTypeFormResubmitted::");
+            CTLog(@"WKNavigationTypeFormResubmitted::");
             
             break;
         }
         case WKNavigationTypeOther: {
-            NSLog(@"WKNavigationTypeOther::");
+            CTLog(@"WKNavigationTypeOther::");
             
             break;
         }
@@ -214,7 +214,7 @@
     if([keyPath isEqualToString:@"estimatedProgress"] == YES)
     {
         double progress = [[self callWebView] estimatedProgress];
-        NSLog(@"%f", progress);
+        CTLog(@"%f", progress);
         if(progress > 0)
         {
             [[self progressView] setProgress:progress animated:YES];

@@ -12,20 +12,55 @@
 
 
 // GETリクエスト
-+ (NSData *) getRequest:(NSString *)urlString complete:(CitrusTouchCompleteBlock)complete
++ (void)getRequest:(NSString *)urlString complete:(CitrusTouchCompleteBlock)complete
 {
+    urlString = [urlString stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLQueryAllowedCharacterSet]];
+    
     NSURL *url = [NSURL URLWithString:urlString];
     
-    NSURLRequest *request = [[NSURLRequest alloc] initWithURL:url];
+    __block NSData *responseData = nil;
     
-    NSError *error;
-    NSData *responseData = [NSURLConnection sendSynchronousRequest:request returningResponse:nil error:&error];
+    dispatch_queue_t httpQueue = dispatch_queue_create("live.citrus.touch.http", DISPATCH_QUEUE_SERIAL);
     
-    if(complete != nil)
+    dispatch_async(httpQueue, ^{
+       
+        CTLog(@"CTHttpRequest.getRequest : %@", urlString);
+        
+        NSURLRequest *request = [[NSURLRequest alloc] initWithURL:url];
+        
+        NSError *error;
+        responseData = [NSURLConnection sendSynchronousRequest:request returningResponse:nil error:&error];
+        
+        dispatch_async(dispatch_get_main_queue(), ^{
+            
+            if(complete != nil)
+            {
+                complete(responseData, error);
+            }
+        });
+    });
+}
+
+// GETリクエスト
++ (void)getRequest:(NSString *)urlString parameters:(NSDictionary *)parameters complete:(CitrusTouchCompleteBlock)complete
+{
+    NSMutableString *url = [NSMutableString string];
+    [url appendString:urlString];
+    
+    if([parameters count] > 0)
     {
-        complete(responseData, error);
+        NSMutableArray *paramList = [NSMutableArray array];
+        for(NSString *key in [parameters allKeys])
+        {
+            NSString *val = [parameters objectForKey:key];
+            
+            [paramList addObject:[NSString stringWithFormat:@"%@=%@", key, val]];
+        }
+        
+        [url appendFormat:@"?%@", [paramList componentsJoinedByString:@"&"]];
     }
-    return  responseData;
+    
+    [CTHttpRequest getRequest:[url copy] complete:complete];
 }
 
 

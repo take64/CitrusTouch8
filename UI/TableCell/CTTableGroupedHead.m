@@ -14,14 +14,6 @@
 // synthesize
 //
 @synthesize cellView;
-@synthesize titleLabel;
-
-
-//
-// dynamic
-//
-@dynamic tintColor;
-
 
 // 初期化
 - (id)initWithFrame:(CGRect)frame
@@ -32,8 +24,6 @@
         // ヘッダビュー
         [self setCellView:[[CTControl alloc] initWithText:@""]];
         [[[self cellView] callStyle] addStyleDictionary:@{
-//         @"left"            :@"9",
-//         @"top"             :@"0",
          @"width"           :@"320",
          @"height"          :@"24",
          @"text-align"      :@"left",
@@ -42,14 +32,7 @@
          @"font-size"       :@"16",
          @"color"           :@"FFFFFF",
          @"padding"         :@"0 0 0 16",
-//         @"margin"          :@"8 8 8 0",
-         
-         
          @"background-color":@"008080",
-//         @"border-color"    :@"A1A7AD",
-//         @"border-width"    :@"1 1 0 1",
-//         @"border-radius"   :@"0 16 16 0",
-//         @"background-image" :@"linear-gradient(rgba(1.00, 1.00, 1.00, 0.75) 0.00, rgba(0.75, 0.75, 0.75, 0.25) 0.05, rgba(0.50, 0.50, 0.50, 0.25) 0.95, rgba(0.25, 0.25, 0.25, 0.75) 1.00)",
          }];
         [self addSubview:[self cellView]];
     }
@@ -63,19 +46,30 @@
     if(self)
     {
         // タイトル
-        [[self cellView] setText:textString];
+        [self setText:textString];
     }
     return self;
     
 }
 
-/*
-// Only override drawRect: if you perform custom drawing.
-// An empty implementation adversely affects performance during animation.
-- (void)drawRect:(CGRect)rect
+// テキストの設定
+- (void)setText:(NSString *)textString
 {
-    // Drawing code
+    [[self cellView] setText:textString];
 }
-*/
+
+// 色の設定
+- (void)setTintColor:(NSString *)tintColorString
+{
+    [[[self cellView] callStyle] addStyleKey:@"background-color" value:tintColorString];
+}
+
+- (void)layoutSubviews
+{
+    // 自動で高さ調節しておく
+    CGRect rect = [self frame];
+    CGFloat height = rect.size.height;
+    [[[self cellView] callStyle] addStyleKey:@"height" value:CTStringFromFloat(height)];
+}
 
 @end

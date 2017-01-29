@@ -13,6 +13,8 @@
 // レコードのデータをDictionaryで取得
 + (NSDictionary *)dictionaryWithEntity:(NSManagedObject *)entityValue;
 
+// ObjectデータをEntityにbindする
++ (NSManagedObject *)bindEntity:(NSManagedObject *)entityValue fromObject:(CTBusinessElement *)elementValue;
 //// データ取得(1レコード)
 //+ (NSManagedObject *) objectWithContext:(NSManagedObjectContext *)context entityName:(NSString *)entityName whereQuery:(NSString *)whereQuery whereParameters:(id)whereParameters;
 //

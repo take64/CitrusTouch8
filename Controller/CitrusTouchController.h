@@ -9,6 +9,9 @@
 #ifndef CitrusTouch_CitrusTouchController_h
 #define CitrusTouch_CitrusTouchController_h
 
+// plane
+#import "CTTableViewController.h"
+
 // edit
 #import "CTEditViewController.h"
 #import "CTListViewController.h"
@@ -40,8 +43,15 @@
 #import "CTSelectColorModal.h" 
 // modal table
 #import "CTTableModal.h"
-//
+
+// controller
 #import "CTSplitViewController.h"
+
+// drawer controller
+#import "CTDrawerViewController.h"
+#import "CTDrawerMenuSection.h"
+#import "CTDrawerMenuItem.h"
+#import "CTDrawerMenuPanel.h"
 //#import "CTRefreshTableViewController.h"
 ////#import "CTSelectModalController.h"
 //#import "CTListModalController.h"

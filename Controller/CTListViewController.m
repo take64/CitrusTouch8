@@ -140,11 +140,90 @@
 //- (void)tableView:(UITableView *)tableView performAction:(SEL)action forRowAtIndexPath:(NSIndexPath *)indexPath withSender:(id)sender;
 
 
-#pragma mark -
-#pragma mark method
+
+#pragma mark - NSFetchedResultsControllerDelegate
+//
+// NSFetchedResultsControllerDelegate
+//
+
+// セルデータ変更後
+- (void)controller:(NSFetchedResultsController *)controller didChangeObject:(id)anObject atIndexPath:(NSIndexPath *)indexPath forChangeType:(NSFetchedResultsChangeType)type newIndexPath:(NSIndexPath *)newIndexPath
+{
+    UITableView *tableView = [self tableView];
+    
+    switch(type)
+    {
+        case NSFetchedResultsChangeInsert:
+            [tableView insertRowsAtIndexPaths:@[ newIndexPath ] withRowAnimation:UITableViewRowAnimationFade];
+            break;
+            
+        case NSFetchedResultsChangeDelete:
+            [tableView deleteRowsAtIndexPaths:@[ indexPath ] withRowAnimation:UITableViewRowAnimationFade];
+            break;
+            
+        case NSFetchedResultsChangeUpdate:
+            [self bindCell:(CTTableCell *)[tableView cellForRowAtIndexPath:indexPath] atIndexPath:indexPath tableView:tableView];
+            [tableView reloadRowsAtIndexPaths:@[ indexPath ] withRowAnimation:UITableViewRowAnimationFade];
+            break;
+            
+        case NSFetchedResultsChangeMove:
+            [tableView deleteRowsAtIndexPaths:@[ indexPath ] withRowAnimation:UITableViewRowAnimationFade];
+            [tableView insertRowsAtIndexPaths:@[ newIndexPath ] withRowAnimation:UITableViewRowAnimationFade];
+            break;
+    }
+}
+// セクション変更後
+- (void)controller:(NSFetchedResultsController *)controller didChangeSection:(id <NSFetchedResultsSectionInfo>)sectionInfo atIndex:(NSUInteger)sectionIndex forChangeType:(NSFetchedResultsChangeType)type
+{
+    UITableView *tableView = [self tableView];
+    
+    switch(type)
+    {
+        case NSFetchedResultsChangeInsert:
+            [tableView insertSections:[NSIndexSet indexSetWithIndex:sectionIndex] withRowAnimation:UITableViewRowAnimationFade];
+            break;
+        case NSFetchedResultsChangeDelete:
+            [tableView deleteSections:[NSIndexSet indexSetWithIndex:sectionIndex] withRowAnimation:UITableViewRowAnimationFade];
+            break;
+        case NSFetchedResultsChangeMove:
+        case NSFetchedResultsChangeUpdate:
+            break;
+    }
+}
+// 変更前
+- (void)controllerWillChangeContent:(NSFetchedResultsController *)controller
+{
+    UITableView *tableView = [self tableView];
+    
+    [tableView beginUpdates];
+}
+// 変更語
+- (void)controllerDidChangeContent:(NSFetchedResultsController *)controller
+{
+    UITableView *tableView = [self tableView];
+    
+    [tableView endUpdates];
+}
+//- (NSString *)controller:(NSFetchedResultsController *)controller sectionIndexTitleForSectionName:(NSString *)sectionName;
+
+
+
+
+#pragma mark - method
 //
 // method
 //
+
+// 追加ボタンの非表示
+- (void)disableAddButton
+{
+    [[self navigationItem] setRightBarButtonItem:nil];
+}
+
+// セルデータ設定
+- (void) bindCell:(CTTableCell *)cell atIndexPath:(NSIndexPath *)indexPath tableView:(UITableView *)tableView
+{
+}
 
 // フェッチ
 - (NSFetchedResultsController *) callFetchedResultsController;

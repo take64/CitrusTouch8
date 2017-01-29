@@ -9,6 +9,7 @@
 #import <Foundation/Foundation.h>
 
 @class CTChartData;
+@class CTColor;
 
 @interface CTChartList : NSObject
 {

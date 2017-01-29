@@ -64,7 +64,6 @@
     [[[[self _mainNavigationController] view] layer] setShadowOpacity:0.5];
     [[[[self _mainNavigationController] view] layer] setShadowColor:[[UIColor blackColor] CGColor]];
     [[[[self _mainNavigationController] view] layer] setShadowPath:[UIBezierPath bezierPathWithRect:[[[self _mainNavigationController] view] bounds]].CGPath];
-
 }
 
 #pragma mark -

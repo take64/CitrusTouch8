@@ -21,11 +21,34 @@
 // synthesize
 //
 @synthesize dataList;
+@synthesize ruledTitleFormat;
+@synthesize yMinInit;
+@synthesize yMaxInit;
 
 // 初期化
-- (id)initWithFrame:(CGRect)frame data:(NSArray<CTChartList *> *)dataValue
+- (id)initWithFrame:(CGRect)frame
 {
     self = [super initWithFrame:frame];
+    if(self)
+    {
+        // 項目タイトルフォーマット
+        NSNumberFormatter *numberFormat = [[NSNumberFormatter alloc] init];
+        [numberFormat setNumberStyle:NSNumberFormatterDecimalStyle];
+        [numberFormat setGroupingSeparator:@","];
+        [numberFormat setGroupingSize:3];
+        [numberFormat setMinimumFractionDigits:2];
+        [numberFormat setMaximumFractionDigits:2];
+        [self setRuledTitleFormat:numberFormat];
+        
+        // min & max 初期値
+        [self setYMinInit:@(NSUIntegerMax)];
+        [self setYMaxInit:@0];
+    }
+    return self;
+}
+- (id)initWithFrame:(CGRect)frame data:(NSArray<CTChartList *> *)dataValue
+{
+    self = [self initWithFrame:frame];
     if(self)
     {
         [self loadData:dataValue];
@@ -98,8 +121,8 @@
     NSArray<CTChartList *> *list = [self dataList];
     
     // 最小値・最大値
-    NSNumber *min = @0;
-    NSNumber *max = @0;
+    NSNumber *min = [self yMinInit];
+    NSNumber *max = [self yMaxInit];
     for(CTChartList *chartList in list)
     {
         min = @(MIN([min doubleValue], [[chartList minValue] doubleValue]));
@@ -135,6 +158,51 @@
     // パスの描画を開始
     CGContextBeginPath(context);
     
+    // 罫線描画
+    int ruledCount = MIN(10, (int)rect.size.height / 32);
+    CGFloat ruledYOffset = (rect.size.height - padding * 2) / ([max doubleValue] - [min doubleValue]);
+    CGFloat diff = ([max doubleValue] - [min doubleValue]);
+    for(int i = 0; i < ruledCount; i++)
+    {
+        CGFloat yOffset = (rect.size.height - padding) - (ruledYOffset / ruledCount) * (i * diff);
+        
+        CGColorRef cgcolor = [[CTColor colorWithHEXString:@"999999"] CGColor];
+        const CGFloat *colors;
+        colors = CGColorGetComponents(cgcolor);
+        CGContextSetRGBFillColor(context, colors[0], colors[1], colors[2], colors[3]);
+        CGContextSetRGBStrokeColor(context, colors[0], colors[1], colors[2], colors[3]);
+        
+        CGPoint fromPoint = CGPointMake(padding, yOffset);
+        CGPoint toPoint = CGPointMake((rect.size.width - padding), yOffset);
+        
+        [CTGraphics drawLine:context fromPoint:fromPoint toPoint:toPoint];
+        
+        
+        
+        // 文字列要素
+        NSMutableDictionary *attributes = [NSMutableDictionary dictionary];
+        
+        // パラグラフ
+        NSMutableParagraphStyle *paragraph = [[NSMutableParagraphStyle alloc] init];
+        [paragraph setAlignment:NSTextAlignmentRight];
+        [paragraph setLineBreakMode:NSLineBreakByCharWrapping];
+        
+        // 要素設定
+        [attributes addEntriesFromDictionary:@{NSParagraphStyleAttributeName:paragraph,
+                                               NSFontAttributeName:[UIFont systemFontOfSize:14]
+                                               }];
+        
+        CGPoint point = CGPointMake((rect.size.width - padding), yOffset);
+        // 文字描画
+        NSString *textString = [[self ruledTitleFormat] stringFromNumber:@([min doubleValue] + (diff / ruledCount * i))];
+        
+//        [CTFormat formatMoneyWithDecimal:[CTDecimal decimalRoundPlainWithDecimal:[CTDecimal decimalWithDouble:[min doubleValue] + (diff / 10 * i)]]];
+        CGSize textSize = [textString sizeWithAttributes:attributes];
+        point.x -= textSize.width;
+        point.y -= textSize.height;
+        [textString drawAtPoint:point withAttributes:attributes];
+        
+    }
     
     // 描画
     for(CTChartList *chartList in list)
@@ -152,9 +220,10 @@
         CGPoint fromPoint = CGPointZero;
         for(CTChartData *chartData in [chartList dataList])
         {
-            CGPoint point = CGPointMake((xOffset * count) + padding, rect.size.height - ((yOffset * [[chartData value] doubleValue]) + padding));
-            
-//            NSLog(@"x = %f; y = %f", point.x, point.y);
+            CGPoint point = CGPointMake(
+                                        (xOffset * count) + padding,
+                                        rect.size.height - ((yOffset * ([[chartData value] doubleValue] - [min doubleValue])) + padding)
+                                        );
             
             // 線描画
             if(CGPointEqualToPoint(fromPoint, CGPointZero) == NO)

@@ -134,4 +134,7 @@ typedef enum {
 // デアクティブ色
 - (CTColor *) deactivateColor;
 
+// height
++ (CGFloat)callHeight;
+
 @end

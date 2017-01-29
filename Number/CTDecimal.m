@@ -18,7 +18,7 @@
     NSDecimalNumberHandler *handler = [NSDecimalNumberHandler decimalNumberHandlerWithRoundingMode:roundingMode
                                                                                              scale:scale
                                                                                   raiseOnExactness:YES
-                                                                                   raiseOnOverflow:YES 
+                                                                                   raiseOnOverflow:YES
                                                                                   raiseOnUnderflow:YES
                                                                                raiseOnDivideByZero:YES];
     return [decimalValue decimalNumberByRoundingAccordingToBehavior:handler];
@@ -87,4 +87,62 @@
     @finally {}
     return decimalValue;
 }
+
+// NSNumberからの変換
++ (NSDecimalNumber *) decimalWithNumber:(NSNumber *)numberValue
+{
+    return [NSDecimalNumber decimalNumberWithDecimal:[numberValue decimalValue]];
+}
+
+// 最大値の取得
++ (NSDecimalNumber *) maxWidhList:(NSArray *)listValue
+{
+    NSDecimalNumber *result = [NSDecimalNumber zero];
+    for(NSDecimalNumber *one in listValue)
+    {
+        if([result compare:one] == NSOrderedAscending)
+        {
+            result = one;
+        }
+    }
+    return result;
+}
+
+// 平均値の取得
++ (NSDecimalNumber *) avgWidhList:(NSArray *)listValue
+{
+    NSDecimalNumber *count = [NSDecimalNumber zero];
+    NSDecimalNumber *total = [NSDecimalNumber zero];
+    for(NSDecimalNumber *one in listValue)
+    {
+        count = [count decimalNumberByAdding:[NSDecimalNumber one]];
+        total = [total decimalNumberByAdding:one];
+    }
+    if([total compare:[NSDecimalNumber zero]] == NSOrderedSame)
+    {
+        return [NSDecimalNumber zero];
+    }
+    return [total decimalNumberByDividingBy:count];
+}
+
+// 比較して最大値を取得する
++ (NSDecimalNumber *)max:(NSDecimalNumber *)decimal1 with:(NSDecimalNumber *)decimal2
+{
+    if([decimal1 compare:decimal2] == NSOrderedDescending)
+    {
+        return decimal1;
+    }
+    return decimal2;
+}
+
+// 比較して最小値を取得する
++ (NSDecimalNumber *)min:(NSDecimalNumber *)decimal1 with:(NSDecimalNumber *)decimal2
+{
+    if([decimal1 compare:decimal2] == NSOrderedAscending)
+    {
+        return decimal1;
+    }
+    return decimal2;
+}
+
 @end

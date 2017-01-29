@@ -7,6 +7,9 @@
 //
 
 #import <Foundation/Foundation.h>
+
+@class CTProgress;
+
 #ifndef CitrusTouch_CitrusTouchTypedef_h
 #define CitrusTouch_CitrusTouchTypedef_h
 
@@ -14,5 +17,7 @@
 // 汎用ブロック
 typedef void (^CitrusTouchBlock)(void);
 typedef void (^CitrusTouchCompleteBlock)(id userInfo, NSError *error);
+typedef void (^CitrusTouchProgressBlock)(CTProgress *progress, NSError *error);
+typedef void (^CitrusTouchSwitchBlock)(NSNumber *switchValue);
 
 #endif

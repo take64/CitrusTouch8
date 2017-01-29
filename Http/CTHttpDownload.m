@@ -48,24 +48,24 @@
 //
 - (void)connection:(NSURLConnection *)connection didFailWithError:(NSError *)error
 {
-    NSLog(@"- (void)connection:(NSURLConnection *)connection didFailWithError:(NSError *)error");
-    NSLog(@"%@", error);
+    CTLog(@"- (void)connection:(NSURLConnection *)connection didFailWithError:(NSError *)error");
+    CTLog(@"%@", error);
 }
 //- (BOOL)connectionShouldUseCredentialStorage:(NSURLConnection *)connection;
 - (void)connection:(NSURLConnection *)connection willSendRequestForAuthenticationChallenge:(NSURLAuthenticationChallenge *)challenge
 {
-    NSLog(@"- (void)connection:(NSURLConnection *)connection willSendRequestForAuthenticationChallenge:(NSURLAuthenticationChallenge *)challenge");
+    CTLog(@"- (void)connection:(NSURLConnection *)connection willSendRequestForAuthenticationChallenge:(NSURLAuthenticationChallenge *)challenge");
     NSURLCredential* creds = [NSURLCredential credentialWithUser:@"take64" password:@"tori151714" persistence:NSURLCredentialPersistencePermanent];
     [[challenge sender] useCredential:creds forAuthenticationChallenge:challenge];
 }
 //- (BOOL)connection:(NSURLConnection *)connection canAuthenticateAgainstProtectionSpace:(NSURLProtectionSpace *)protectionSpace;
 - (void)connection:(NSURLConnection *)connection didReceiveAuthenticationChallenge:(NSURLAuthenticationChallenge *)challenge
 {
-    NSLog(@"- (void)connection:(NSURLConnection *)connection didReceiveAuthenticationChallenge:(NSURLAuthenticationChallenge *)challenge");
+    CTLog(@"- (void)connection:(NSURLConnection *)connection didReceiveAuthenticationChallenge:(NSURLAuthenticationChallenge *)challenge");
 }
 - (void)connection:(NSURLConnection *)connection didCancelAuthenticationChallenge:(NSURLAuthenticationChallenge *)challenge
 {
-    NSLog(@"- (void)connection:(NSURLConnection *)connection didCancelAuthenticationChallenge:(NSURLAuthenticationChallenge *)challenge");
+    CTLog(@"- (void)connection:(NSURLConnection *)connection didCancelAuthenticationChallenge:(NSURLAuthenticationChallenge *)challenge");
 }
 
 
@@ -76,19 +76,18 @@
 //
 //- (NSURLRequest *)connection:(NSURLConnection *)connection willSendRequest:(NSURLRequest *)request redirectResponse:(NSURLResponse *)response
 //{
-//    NSLog(@"- (NSURLRequest *)connection:(NSURLConnection *)connection willSendRequest:(NSURLRequest *)request redirectResponse:(NSURLResponse *)response");
+//    CTLog(@"- (NSURLRequest *)connection:(NSURLConnection *)connection willSendRequest:(NSURLRequest *)request redirectResponse:(NSURLResponse *)response");
 //}
 - (void)connection:(NSURLConnection *)connection didReceiveResponse:(NSURLResponse *)response
 {
-    NSLog(@"- (void)connection:(NSURLConnection *)connection didReceiveResponse:(NSURLResponse *)response");
-    NSLog(@"%qi", [response expectedContentLength]);
+    CTLog(@"- (void)connection:(NSURLConnection *)connection didReceiveResponse:(NSURLResponse *)response length:%qi", [response expectedContentLength]);
     
     // コンテンツサイズ設定
     [[self _contentLengths] setObject:[NSNumber numberWithLongLong:[response expectedContentLength]] forKey:[self callIndexFromConnection:connection]];
 }
 - (void)connection:(NSURLConnection *)connection didReceiveData:(NSData *)data
 {
-    NSLog(@"- (void)connection:(NSURLConnection *)connection didReceiveData:(NSData *)data");
+    CTLog(@"- (void)connection:(NSURLConnection *)connection didReceiveData:(NSData *)data");
     
     // 保存
     NSNumber *index = [self callIndexFromConnection:connection];
@@ -98,24 +97,24 @@
     NSUInteger downloadedLength = [(NSData *)[[self _downloadDatas] objectForKey:index] length];
     
     long long completeLength = [(NSNumber *)[[self _contentLengths] objectForKey:index] longLongValue];
-    NSLog(@"%d%%", (int)(((float)downloadedLength / completeLength) * 100));
+    CTLog(@"%d%%", (int)(((float)downloadedLength / completeLength) * 100));
     
 }
 //- (NSInputStream *)connection:(NSURLConnection *)connection needNewBodyStream:(NSURLRequest *)request
 //{
-//    NSLog(@"- (NSInputStream *)connection:(NSURLConnection *)connection needNewBodyStream:(NSURLRequest *)request");
+//    CTLog(@"- (NSInputStream *)connection:(NSURLConnection *)connection needNewBodyStream:(NSURLRequest *)request");
 //}
 - (void)connection:(NSURLConnection *)connection didSendBodyData:(NSInteger)bytesWritten totalBytesWritten:(NSInteger)totalBytesWritten totalBytesExpectedToWrite:(NSInteger)totalBytesExpectedToWrite
 {
-    NSLog(@"- (void)connection:(NSURLConnection *)connection didSendBodyData:(NSInteger)bytesWritten totalBytesWritten:(NSInteger)totalBytesWritten totalBytesExpectedToWrite:(NSInteger)totalBytesExpectedToWrite");
+    CTLog(@"- (void)connection:(NSURLConnection *)connection didSendBodyData:(NSInteger)bytesWritten totalBytesWritten:(NSInteger)totalBytesWritten totalBytesExpectedToWrite:(NSInteger)totalBytesExpectedToWrite");
 }
 //- (NSCachedURLResponse *)connection:(NSURLConnection *)connection willCacheResponse:(NSCachedURLResponse *)cachedResponse
 //{
-//    NSLog(@"- (NSCachedURLResponse *)connection:(NSURLConnection *)connection willCacheResponse:(NSCachedURLResponse *)cachedResponse");
+//    CTLog(@"- (NSCachedURLResponse *)connection:(NSURLConnection *)connection willCacheResponse:(NSCachedURLResponse *)cachedResponse");
 //}
 - (void)connectionDidFinishLoading:(NSURLConnection *)connection
 {
-    NSLog(@"- (void)connectionDidFinishLoading:(NSURLConnection *)connection");
+    CTLog(@"- (void)connectionDidFinishLoading:(NSURLConnection *)connection");
     if([self _callbackTarget] != nil && [self _callbackSelector] != nil)
     {
         if([[self _callbackTarget] respondsToSelector:[self _callbackSelector]] == YES)

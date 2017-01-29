@@ -11,25 +11,15 @@
 @interface CTColor : UIColor
 
 // 16進数カラー からCTColor(UIColor) オブジェクトを取得
-+ (CTColor *) colorWithHEXString:(NSString *)hexString;
++ (CTColor *)colorWithHEXString:(NSString *)hexString;
 
 // 16進数カラー からCTColor(UIColor) オブジェクトを取得(透過色付き)
-+ (CTColor *) colorWithHEXString:(NSString *)hexString alpha:(CGFloat)alpha;
++ (CTColor *)colorWithHEXString:(NSString *)hexString alpha:(CGFloat)alpha;
 
 // 16進数カラー から補色CTColor(UIColor) オブジェクトを取得
-+ (CTColor *) complementaryColorWithHEXString:(NSString *)hexString;
++ (CTColor *)complementaryColorWithHEXString:(NSString *)hexString;
 
 // CTColor(UIColor) から 16進数文字列を取得
-+ (NSString *) hexStringWithColor:(CTColor *)colorValue;
-
-//// 色取得(赤)
-//- (CGFloat)colorRed;
-//// 色取得(緑)
-//- (CGFloat)colorGreen;
-//// 色取得(青)
-//- (CGFloat)colorBlue;
-//// 色取得(透)
-//- (CGFloat)colorAlpha;
-
++ (NSString *)hexStringWithColor:(CTColor *)colorValue;
 
 @end

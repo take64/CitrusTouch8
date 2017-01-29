@@ -34,7 +34,10 @@
     NSNumber *numerator;
     
     // 親ビュー
-    UIView *_parentView;
+    UIView *parentView;
+    
+    // 描画
+    dispatch_queue_t drawQueue;
 }
 
 //
@@ -47,7 +50,8 @@
 @property (nonatomic, retain) CTLabel *percentageLabel;
 @property (nonatomic, retain) NSNumber *denominator;
 @property (nonatomic, retain) NSNumber *numerator;
-@property (nonatomic, retain) UIView *_parentView;
+@property (nonatomic, retain) UIView *parentView;
+@property (nonatomic)         dispatch_queue_t drawQueue;
 
 
 //
@@ -55,31 +59,34 @@
 //
 
 // 初期化
-- (id) initWithParentView:(UIView *)parentView;
+- (id)initWithParentView:(UIView *)parentViewValue;
 
 
 // 表示
-- (void) show;
+- (void)show;
 
 // 非表示
-- (void) hide;
+- (void)hide;
 
 // タイトル
-- (void) setTitle:(NSString *) stringValue;
+- (void)setTitle:(NSString *) stringValue;
 
 // メッセージ
-- (void) setMessage:(NSString *) stringValue;
+- (void)setMessage:(NSString *) stringValue;
 
 // パーセンテージ
-- (void) setPercentage:(NSString *) stringValue;
+- (void)setPercentage:(NSString *) stringValue;
 
 // 分子更新
-- (void) updateNumerator:(NSNumber *)numberValue;
+- (void)updateNumerator:(NSNumber *)numberValue;
 
 // 分母更新
-- (void) updateDenominator:(NSNumber *)numberValue;
+- (void)updateDenominator:(NSNumber *)numberValue;
+
+// 分子分母更新
+- (void)updateNumerator:(NSNumber *)numberValue1 denominator:(NSNumber *)numberValue2;
 
 // 分子等更新
-- (void) updateWithInfo:(NSDictionary *)infoValue;
+- (void)updateWithInfo:(NSDictionary *)infoValue;
 
 @end

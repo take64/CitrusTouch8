@@ -174,6 +174,7 @@
 
 // 初期化
 
+// 初期化
 - (id) initWithPrefix:(NSString *)prefixString suffix:(NSString *)suffixString reuseIdentifier:(NSString *)reuseIdentifier
 {
     self = [self initWithStyle:UITableViewCellStyleDefault reuseIdentifier:reuseIdentifier];
@@ -364,6 +365,12 @@
 - (CTColor *) deactivateColor
 {
     return nil;
+}
+
+// height
++ (CGFloat)callHeight
+{
+    return CL8(6);
 }
 
 @end

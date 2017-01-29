@@ -12,20 +12,21 @@
 {
     // セルビュー
     CTControl *cellView;
-    
-    // タイトル
-    CTLabel *titleLabel;
-    
-    // tintColor
-    CTColor *tintColor;
 }
 
 //
 // property
 //
 @property (nonatomic, retain) CTControl *cellView;
-@property (nonatomic, retain) CTLabel *titleLabel;
-@property (nonatomic, retain) CTColor *tintColor;
 
+//
+// method
+//
+
+// テキストの設定
+- (void)setText:(NSString *)textString;
+
+// 色の設定
+- (void)setTintColor:(NSString *)tintColorString;
 
 @end

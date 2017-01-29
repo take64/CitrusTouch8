@@ -235,7 +235,21 @@
     return calendar;
 }
 
+// 前月の月初めを取得
++ (NSDate *)prevMonthFirstDateWithDate:(NSDate *)dateValue
+{
+    NSDateComponents *components = [CTDate componentsWithDate:dateValue];
+    NSDate *resultDate = [CTDate dateWithYear:[components year] month:[components month] - 1 day:1 hour:0 minute:0 second:0];
+    return resultDate;
+}
 
+// 翌月の月初めを取得
++ (NSDate *)nextMonthFirstDateWithDate:(NSDate *)dateValue
+{
+    NSDateComponents *components = [CTDate componentsWithDate:dateValue];
+    NSDate *resultDate = [CTDate dateWithYear:[components year] month:[components month] + 1 day:1 hour:0 minute:0 second:0];
+    return resultDate;
+}
 
 //// NSDateから日付だけのNSDateを取得
 //+ (NSDate *) dateOnlyWithDate:(NSDate *)dateValue

@@ -180,7 +180,8 @@
     if(self)
     {
         // タイトル
-        [[self _tableViewController] setTitle:titleValue];
+//        [[self _tableViewController] setTitle:titleValue];
+        [self setTitle:titleValue];
         
         // delegate
         [[[self _tableViewController] tableView] setDataSource:self];
@@ -226,6 +227,18 @@
     
     // 表示
     [[self _alertMessage] show];
+}
+
+// タイトル設定
+- (void)setTitle:(NSString *)titleValue
+{
+    [[self _tableViewController] setTitle:titleValue];
+}
+
+// ツールバー表示
+- (void)toolbarHidden:(BOOL)hiddenValue
+{
+    [[[self _tableViewController] navigationController] setToolbarHidden:hiddenValue];
 }
 
 // 保存

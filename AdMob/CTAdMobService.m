@@ -45,7 +45,6 @@
     GADBannerView *bannerView = [bannerList objectForKey:bannerID];
     if(bannerView == nil)
     {
-//        NSLog(@"bannerID = %@", bannerID);
         // 生成
         bannerView = [[GADBannerView alloc] initWithFrame:CGRectMake(0, 0, bannerSize.width, bannerSize.height)];
         [bannerView setAdUnitID:[self adUnitID]];

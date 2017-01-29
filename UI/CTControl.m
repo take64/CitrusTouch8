@@ -52,7 +52,7 @@
         [[[self callStyleNormal] callAllStyles] addObserver:self forKeyPath:@"height" options:NSKeyValueObservingOptionNew context:NULL];
         [[[self callStyleNormal] callAllStyles] addObserver:self forKeyPath:@"top" options:NSKeyValueObservingOptionNew context:NULL];
         [[[self callStyleNormal] callAllStyles] addObserver:self forKeyPath:@"left" options:NSKeyValueObservingOptionNew context:NULL];
-//        [self addObserver:self forKeyPath:@"text" options:NSKeyValueObservingOptionNew context:NULL];
+        //        [self addObserver:self forKeyPath:@"text" options:NSKeyValueObservingOptionNew context:NULL];
         
     }
     return self;
@@ -258,7 +258,7 @@
     [self addPathRadius:_borderRadiuses rect:contentRect];
     CGContextFillPath(context);
     
-	CGContextRestoreGState(context);
+    CGContextRestoreGState(context);
     
     
     
@@ -420,9 +420,9 @@
             _ctcolor = [CTColor colorWithHEXString:@"FFFFFF"];
         }
         [attributes addEntriesFromDictionary:@{NSForegroundColorAttributeName:_ctcolor}];
-//        CGColorRef _colorref = [_ctcolor CGColor];
-//        const CGFloat *_colors = CGColorGetComponents(_colorref);
-//        CGContextSetRGBFillColor(context, _colors[0], _colors[1], _colors[2], _colors[3]);
+        //        CGColorRef _colorref = [_ctcolor CGColor];
+        //        const CGFloat *_colors = CGColorGetComponents(_colorref);
+        //        CGContextSetRGBFillColor(context, _colors[0], _colors[1], _colors[2], _colors[3]);
         
         // ラインブレイク
         NSString *_lineBreak = [stylesheet callStyleKey:@"line-break"];
@@ -455,7 +455,7 @@
             }
             else if([_lineBreak isEqualToString:@"truncating-middle"] == YES)
             {
-                lineBreakMode = NSLineBreakByTruncatingMiddle;	// Truncate middle of line:  "ab...yz"
+                lineBreakMode = NSLineBreakByTruncatingMiddle;  // Truncate middle of line:  "ab...yz"
             }
         }
         [paragraph setLineBreakMode:lineBreakMode];
@@ -474,11 +474,12 @@
                 [attributes addEntriesFromDictionary:@{NSFontAttributeName:font}];
                 fontBounds = [[self text] boundingRectWithSize:CGSizeMake(paddedContentRect.size.width, CGFLOAT_MAX) options:(NSStringDrawingUsesLineFragmentOrigin | NSStringDrawingTruncatesLastVisibleLine) attributes:attributes context:nil].size;
                 fontBounds.width = paddedContentRect.size.width;
-                if(fontBounds.height > paddedContentRect.size.height)
+                double fontSize = [[stylesheet callStyleKey:@"font-size"] doubleValue];
+                if(fontBounds.height > paddedContentRect.size.height && fontSize > 1)
                 {
                     fontBounds.height = paddedContentRect.size.height;
                     
-                    [stylesheet addStyleKey:@"font-size" value:[@([[stylesheet callStyleKey:@"font-size"] doubleValue] - 0.5) stringValue]];
+                    [stylesheet addStyleKey:@"font-size" value:[@(fontSize - 0.5) stringValue]];
                 }
                 else
                 {

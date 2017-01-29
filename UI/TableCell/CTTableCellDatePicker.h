@@ -11,7 +11,8 @@
 
 typedef NS_ENUM(NSInteger, CTTableCellDatePickerMode) {
     CTTableCellDatePickerModeNone,
-    CTTableCellDatePickerModeStandard
+    CTTableCellDatePickerModeStandard,
+    CTTableCellDatePickerModeDate,
 };
 
 @interface CTTableCellDatePicker : CTTableCellTextField

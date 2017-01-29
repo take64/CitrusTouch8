@@ -28,6 +28,9 @@
 // method
 //
 
+// 追加ボタンの非表示
+- (void)disableAddButton;
+
 // フェッチ
 - (NSFetchedResultsController *) callFetchedResultsController;
 

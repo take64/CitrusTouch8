@@ -15,8 +15,10 @@
 
 #import "CTColor.h"
 
+#import "CTControl.h"
 #import "CTLabel.h"
 #import "CTButton.h"
+#import "CTView.h"
 
 // panel
 #import "CTCalendarPanel.h"
@@ -47,7 +49,9 @@
 #import "CTTableCellImage.h"
 #import "CTTableCellNumberPad.h"
 #import "CTTableCellButtonTextField.h"
+#import "CTTableCellButtonNumberPad.h"
 #import "CTTableCellSlider.h"
+#import "CTTableCellFavorite.h"
 // table cell inner
 #import "CTTableCellTextFieldInnerTextField.h"
 
@@ -58,6 +62,8 @@
 // tab
 #import "CTTabPanel.h"
 
+// search
+#import "CTSearchBar.h"
 
 // sheet
 //#import "CTSheetView";

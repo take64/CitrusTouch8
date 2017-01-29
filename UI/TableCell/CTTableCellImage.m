@@ -26,7 +26,7 @@
     if([self isSubLayout] == NO)
     {
         CGPoint centerPoint = [[self contentView] center];
-        centerPoint.x += CL8(8);
+//        centerPoint.x += CL8(8);
         
         [[self _imageView] setCenter:centerPoint];
 //        [[self _imageView] setFrame:CGRectOffset(CGRectInset([self contentFrame], 8, 4), 0, -2)];
@@ -49,7 +49,8 @@
     self = [super initWithPrefix:prefixString suffix:suffixString reuseIdentifier:reuseIdentifier];
     if(self)
     {
-        // ボタン
+        // イメージ
+        [self set_imageView:[[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 100, 100)]];
         [self set_image:[[UIImage alloc] init]];
 //        [[self contentView] addSubview:[[UIImageView alloc] initWithImage:[self _image]]];
         
@@ -78,7 +79,9 @@
 {
     [self set_imageData:dataValue];
     [self set_image:[UIImage imageWithData:dataValue]];
-    [self set_imageView:[[UIImageView alloc] initWithImage:[self _image]]];
+//    [self set_imageView:[[UIImageView alloc] initWithImage:[self _image]]];
+    [[self _imageView] setImage:[self _image]];
+    [[self _imageView] layoutIfNeeded];
     [[self contentView] addSubview:[self _imageView]];
 }
 //// 初期化

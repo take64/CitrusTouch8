@@ -35,10 +35,11 @@
     if([self enableMenu] == NO)
     {
         [[UIMenuController sharedMenuController] setMenuVisible:NO];
-        [self resignFirstResponder];
+//        [self resignFirstResponder];
     }
     return [super canPerformAction:action withSender:sender];
 }
+
 
 
 #pragma mark -

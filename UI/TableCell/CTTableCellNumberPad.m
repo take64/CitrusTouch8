@@ -161,8 +161,6 @@
 // 値設定
 - (void) onTapButtonNumber:(NSString *)numberString
 {
-    NSLog(@"%@", numberString);
-    
     if([numberString isEqualToString:@"OK"] == YES)
     {
         if([[self responder] canResignFirstResponder] == YES)

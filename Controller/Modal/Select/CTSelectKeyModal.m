@@ -31,6 +31,13 @@
     }
     return self;
 }
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    
+    [[self _tableView] reloadData];
+}
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
@@ -58,10 +65,10 @@
 {
     static NSString *CellId = @"CellId";
     
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellId];
+    CTTableCellLabel *cell = [tableView dequeueReusableCellWithIdentifier:CellId];
     if(cell == nil)
     {
-        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellId];
+        cell = [[CTTableCellLabel alloc] initWithPrefix:nil reuseIdentifier:CellId];
     }
     if(cell != nil)
     {
@@ -70,7 +77,7 @@
         id _selectedKey = [[[self keyList] objectAtIndex:section] objectAtIndex:row];
         
         NSString *valString = [[self keyDict] objectForKey:_selectedKey];
-        [[cell textLabel] setText:valString];
+        [cell setContentText:valString];
         
         [cell setAccessoryType:UITableViewCellAccessoryNone];
         if([[self selectedList] containsObject:_selectedKey] == YES)
@@ -189,7 +196,7 @@
     [self setKeyList:_keyList];
     [self setKeyDict:_keyDict];
     
-    [[self _tableView] reloadData];
+//    [[self _tableView] reloadData];
 }
 
 @end

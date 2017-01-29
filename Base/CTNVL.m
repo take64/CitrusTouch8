@@ -13,7 +13,7 @@
 // NVL関数
 + (id) compare:(id)compare replace:(id)replace
 {
-    if(compare == nil)
+    if(compare == nil || [compare isEqual:[NSNull null]] == YES)
     {
         return replace;
     }
@@ -26,7 +26,7 @@
 // NVL2関数
 + (id) compare:(id)compare value1:(id)value1 value2:(id)value2
 {
-    if(compare == nil)
+    if(compare == nil || [compare isEqual:[NSNull null]] == YES)
     {
         return value2;
     }

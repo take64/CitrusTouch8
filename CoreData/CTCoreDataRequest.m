@@ -145,35 +145,41 @@
 // count取得(1件)
 + (id) countWithContext:(NSManagedObjectContext *)context entityName:(NSString *)entityName columnName:(NSString *)columnName whereQuery:(NSString *)whereQuery whereParameters:(NSArray *)whereParameters
 {
-    return [CTCoreDataRequest functionWithContext:context entityName:entityName functionName:@"count:" columnName:columnName whereQuery:whereQuery whereParameters:whereParameters];
+    return [CTCoreDataRequest functionWithContext:context entityName:entityName functionName:@"count:" columnName:columnName whereQuery:whereQuery whereParameters:whereParameters groupby:nil];
+}
+
+// count取得(1件)(group by)
++ (id) countWithContext:(NSManagedObjectContext *)context entityName:(NSString *)entityName columnName:(NSString *)columnName whereQuery:(NSString *)whereQuery whereParameters:(NSArray *)whereParameters groupby:(NSArray *)groupby
+{
+    return [CTCoreDataRequest functionWithContext:context entityName:entityName functionName:@"count:" columnName:columnName whereQuery:whereQuery whereParameters:whereParameters groupby:groupby];
 }
 
 // max取得(1件)
 + (id) maxWithContext:(NSManagedObjectContext *)context entityName:(NSString *)entityName columnName:(NSString *)columnName whereQuery:(NSString *)whereQuery whereParameters:(NSArray *)whereParameters
 {
-    return [CTCoreDataRequest functionWithContext:context entityName:entityName functionName:@"max:" columnName:columnName whereQuery:whereQuery whereParameters:whereParameters];
+    return [CTCoreDataRequest functionWithContext:context entityName:entityName functionName:@"max:" columnName:columnName whereQuery:whereQuery whereParameters:whereParameters groupby:nil];
 }
 
 // min取得(1件)
 + (id) minWithContext:(NSManagedObjectContext *)context entityName:(NSString *)entityName columnName:(NSString *)columnName whereQuery:(NSString *)whereQuery whereParameters:(NSArray *)whereParameters
 {
-    return [CTCoreDataRequest functionWithContext:context entityName:entityName functionName:@"min:" columnName:columnName whereQuery:whereQuery whereParameters:whereParameters];
+    return [CTCoreDataRequest functionWithContext:context entityName:entityName functionName:@"min:" columnName:columnName whereQuery:whereQuery whereParameters:whereParameters groupby:nil];
 }
 
 // average取得(1件)
 + (id) averageWithContext:(NSManagedObjectContext *)context entityName:(NSString *)entityName columnName:(NSString *)columnName whereQuery:(NSString *)whereQuery whereParameters:(NSArray *)whereParameters
 {
-    return [CTCoreDataRequest functionWithContext:context entityName:entityName functionName:@"average:" columnName:columnName whereQuery:whereQuery whereParameters:whereParameters];
+    return [CTCoreDataRequest functionWithContext:context entityName:entityName functionName:@"average:" columnName:columnName whereQuery:whereQuery whereParameters:whereParameters groupby:nil];
 }
 
 // sum取得(1件)
 + (id) sumWithContext:(NSManagedObjectContext *)context entityName:(NSString *)entityName columnName:(NSString *)columnName whereQuery:(NSString *)whereQuery whereParameters:(NSArray *)whereParameters
 {
-    return [CTCoreDataRequest functionWithContext:context entityName:entityName functionName:@"sum:" columnName:columnName whereQuery:whereQuery whereParameters:whereParameters];
+    return [CTCoreDataRequest functionWithContext:context entityName:entityName functionName:@"sum:" columnName:columnName whereQuery:whereQuery whereParameters:whereParameters groupby:nil];
 }
 
 // 件数取得(1件)
-+ (id) functionWithContext:(NSManagedObjectContext *)context entityName:(NSString *)entityName functionName:(NSString *)functionName columnName:(NSString *)columnName whereQuery:(NSString *)whereQuery whereParameters:(NSArray *)whereParameters
++ (id) functionWithContext:(NSManagedObjectContext *)context entityName:(NSString *)entityName functionName:(NSString *)functionName columnName:(NSString *)columnName whereQuery:(NSString *)whereQuery whereParameters:(NSArray *)whereParameters groupby:(NSArray *)groupby
 {
     // リクエスト
     NSFetchRequest *request = [[NSFetchRequest alloc] init];
@@ -194,6 +200,12 @@
     // result properties
     [request setResultType:NSDictionaryResultType];
     [request setPropertiesToFetch:[NSArray arrayWithObject:expressionDescription]];
+    
+    // groupby
+    if(groupby != nil)
+    {
+        [request setPropertiesToGroupBy:groupby];
+    }
 
     // 取得条件
     NSPredicate *predicate = [NSPredicate predicateWithFormat:whereQuery argumentArray:whereParameters];
@@ -207,7 +219,7 @@
     // エラー
     if(error)
     {
-        NSLog(@"ERROR! CTCoreDataService.maxWithContext - %@",error);
+        NSLog(@"ERROR! CTCoreDataRequest.function - %@",error);
         result = @0;
     }
     else

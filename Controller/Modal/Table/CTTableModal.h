@@ -59,5 +59,10 @@
 // メッセージ
 - (void) alertMessageWithTitle:(NSString *)titleValue message:(id)messages;
 
+// タイトル設定
+- (void)setTitle:(NSString *)titleValue;
+
+// ツールバー表示
+- (void)toolbarHidden:(BOOL)hiddenValue;
 
 @end

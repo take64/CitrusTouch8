@@ -121,7 +121,7 @@
         double textAngle = startAngle + ((endAngle - startAngle) / 2);
         
         CGPoint point = CGPointMake((160 + 110 * cos(textAngle)), (160 + 110 * sin(textAngle)));
-//        NSLog(@"%@; x = %f; y = %f; start = %f; end = %f", [one title], point.x, point.y, startAngle, endAngle);
+        
         // 文字描画
         NSString *textString = [NSString stringWithFormat:@"%@\n%.1f%%", [one title], ([[one value] doubleValue] / [totalValue doubleValue] * 100)];
         NSInteger offset = 00;

@@ -40,4 +40,19 @@
 // NSStringからの変換
 + (NSDecimalNumber *) decimalWithString:(NSString *)stringValue;
 
+// NSNumberからの変換
++ (NSDecimalNumber *) decimalWithNumber:(NSNumber *)numberValue;
+
+// 最大値の取得
++ (NSDecimalNumber *) maxWidhList:(NSArray *)listValue;
+
+// 平均値の取得
++ (NSDecimalNumber *) avgWidhList:(NSArray *)listValue;
+
+// 比較して最大値を取得する
++ (NSDecimalNumber *)max:(NSDecimalNumber *)decimal1 with:(NSDecimalNumber *)decimal2;
+
+// 比較して最小値を取得する
++ (NSDecimalNumber *)min:(NSDecimalNumber *)decimal1 with:(NSDecimalNumber *)decimal2;
+
 @end

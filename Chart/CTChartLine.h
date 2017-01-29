@@ -16,6 +16,14 @@
     // データリスト
     NSArray<CTChartList *> *dataList;
     
+    // 項目フォーマット
+    NSNumberFormatter *ruledTitleFormat;
+    
+    // min & max の初期値
+    NSNumber *yMinInit;
+    NSNumber *yMaxInit;
+    
+    
 //    // X軸タイトルリスト
 //    NSArray *xAxisTitles;
 //    
@@ -80,6 +88,9 @@
 // property
 //
 @property (nonatomic, retain) NSArray<CTChartList *> *dataList;
+@property (nonatomic, retain) NSNumberFormatter *ruledTitleFormat;
+@property (nonatomic, retain) NSNumber *yMinInit;
+@property (nonatomic, retain) NSNumber *yMaxInit;
 
 //@property (nonatomic, retain) NSArray *xAxisTitles;
 //@property (nonatomic, assign) CGRect xAxisFrame;

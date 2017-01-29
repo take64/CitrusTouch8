@@ -42,6 +42,7 @@
         
         // テキストフィールド
         [[self textField] setEnableMenu:NO];
+        [[self textField] setClearButtonMode:UITextFieldViewModeNever];
         
         // パッキングビュー
         CGFloat width = 320;
@@ -181,12 +182,35 @@
             [[self inputPackingView] addSubview:buttonTime];
         }
     }
+    // ピッカーモード日付
+    else if(pickerModeValue == CTTableCellDatePickerModeDate)
+    {
+        // 日付モード
+        [[self datePicker] setDatePickerMode:UIDatePickerModeDate];
+        
+        // 位置変更
+        [[self datePicker] setFrame:CGRectMake(0, 0, 320, 216)];
+        [[self datePicker] setCenter:[[self inputPackingView] center]];
+        
+        // パッキングビュー
+        [[self inputPackingView] setFrame:CGRectMake(0, 0, 320, 248)];
+        [[self inputPackingView] addSubview:[self datePicker]];
+    }
 }
 
 // 取得(日付)
 - (NSDate *) date
 {
-    return [[self datePicker] date];
+    // 日付
+    NSDate *result = [[self datePicker] date];
+    
+    // 日付モードの時は時間を切る
+    if([self _pickerMode] == CTTableCellDatePickerModeDate)
+    {
+        result = [CTDate dateRemoveHHIISSWithDate:result];
+    }
+    
+    return result;
 }
 // 設定(日付)
 - (void) setDate:(NSDate *)dateValue

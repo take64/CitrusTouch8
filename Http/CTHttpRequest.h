@@ -11,6 +11,9 @@
 @interface CTHttpRequest : NSObject
 
 // GETリクエスト
-+ (NSData *) getRequest:(NSString *)urlString complete:(CitrusTouchCompleteBlock)complete;
++ (void)getRequest:(NSString *)urlString complete:(CitrusTouchCompleteBlock)complete;
+
+// GETリクエスト
++ (void)getRequest:(NSString *)urlString parameters:(NSDictionary *)parameters complete:(CitrusTouchCompleteBlock)complete;
 
 @end

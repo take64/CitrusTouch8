@@ -54,7 +54,6 @@
 
 -(void) setNeedsDisplay
 {
-    NSLog(@"CTTabPanel.setNeedsDisplay");
     [super setNeedsDisplay];
 }
 

@@ -23,7 +23,8 @@
 @synthesize percentageLabel;
 @synthesize denominator;
 @synthesize numerator;
-@synthesize _parentView;
+@synthesize parentView;
+@synthesize drawQueue;
 
 // 初期化
 - (id)initWithFrame:(CGRect)frame
@@ -103,6 +104,8 @@
          }];
         [panel addSubview:[self messageLabel]];
         
+        
+        [self setDrawQueue: dispatch_queue_create("live.citrus.touch.draw",  DISPATCH_QUEUE_SERIAL)];
     }
     return self;
 }
@@ -115,9 +118,9 @@
 //
 
 // 初期化
-- (id) initWithParentView:(UIView *)parentView
+- (id) initWithParentView:(UIView *)parentViewValue
 {
-    CGRect parentFrame = [parentView frame];
+    CGRect parentFrame = [parentViewValue frame];
     CGFloat width;
     CGFloat height;
     if([[UIDevice currentDevice] orientation] == UIDeviceOrientationPortrait)
@@ -132,10 +135,6 @@
     }
     if(parentFrame.size.width != width)
     {
-//        CGFloat x = parentFrame.origin.x;
-//        CGFloat y = parentFrame.origin.y;
-//        parentFrame.origin.x = y;
-//        parentFrame.origin.y = x;
         parentFrame.origin.y = 0;
         parentFrame.origin.x = 0;
     }
@@ -147,7 +146,7 @@
     if(self)
     {
         // 親ビュー
-        [self set_parentView:parentView];
+        [self setParentView:parentViewValue];
         
     }
     return self;
@@ -161,16 +160,14 @@
     [[self activityIndicator] startAnimating];
     
     // 表示
-    [[self _parentView] addSubview:self];
+    [[self parentView] addSubview:self];
 }
 
 // 非表示
 - (void) hide
 {
     // プログレス
-    [self updateNumerator:0];
-    [self updateDenominator:0];
-    [[self progressBar] setProgress:0 animated:NO];
+    [self updateNumerator:@1 denominator:@1];
     
     // 回転停止
     [[self activityIndicator] stopAnimating];
@@ -192,45 +189,83 @@
 }
 
 // パーセンテージ
-- (void) setPercentage:(NSString *) stringValue
+- (void) setPercentage:(NSString *)stringValue
 {
+    CTLog(@"CTOverlayProgressIndicator.setPercentage:%@", stringValue);
     [[self percentageLabel] setText:stringValue];
 }
 
 // 分子更新
 - (void) updateNumerator:(NSNumber *)numberValue
 {
+    CTLog(@"CTOverlayProgressIndicator.updateNumerator:%@", numberValue);
+    
+    if(numberValue == nil)
+    {
+        CTLog(@"%@", numberValue);
+    }
+    
     // 分子更新
     [self setNumerator:numberValue];
     
     // バー更新
-    CGFloat progress = [[self numerator] floatValue] / [[self denominator] floatValue];
-    if(isnan(progress) == TRUE || progress == 0)
-    {
-        [[self progressBar] setProgress:0 animated:NO];
-    }
-    else
-    {
-        usleep(50000);
-        [[self progressBar] setProgress:progress animated:YES];
-    }
-    
-    // パーセンテージ更新
-    [self setPercentage:[NSString stringWithFormat:@"%.2f %%", (progress * 100)]];
+    [self updateProgressBar];
 }
 
 // 分母更新
 - (void) updateDenominator:(NSNumber *)numberValue
 {
+    CTLog(@"CTOverlayProgressIndicator.updateDenominator:%@", numberValue);
+    
     // 分母更新
     [self setDenominator:numberValue];
     
     // バー更新
-    CGFloat progress = [[self numerator] floatValue] / [[self denominator] floatValue];
-    [[self progressBar] setProgress:progress animated:YES];
+    [self updateProgressBar];
+}
+
+// 分子分母更新
+- (void)updateNumerator:(NSNumber *)numberValue1 denominator:(NSNumber *)numberValue2
+{
+    CTLog(@"CTOverlayProgressIndicator.updateNumerator:%@ denominator:%@", numberValue1, numberValue2);
     
-    // パーセンテージ更新
-    [self setPercentage:[NSString stringWithFormat:@"%.2f %%", (progress * 100)]];
+    // 分子更新
+    [self setNumerator:numberValue1];
+    // 分母更新
+    [self setDenominator:numberValue2];
+    
+    
+    // バー更新
+    [self updateProgressBar];
+}
+
+// バー更新
+- (void)updateProgressBar
+{
+    // 進捗計算
+    CGFloat progress = [[self numerator] floatValue] / [[self denominator] floatValue];
+    if(isnan(progress) == TRUE || progress < 0)
+    {
+        progress = 0;
+    }
+    
+    dispatch_async([self drawQueue], ^{
+       
+        dispatch_async(dispatch_get_main_queue(), ^{
+            
+            usleep(50000);
+            
+            // バー更新
+            BOOL animated = (progress == 0 ? NO : YES);
+            CTLog(@"percentage : %f", progress);
+            [[self progressBar] setProgress:progress animated:animated];
+            
+            // パーセンテージ更新
+            [self setPercentage:[NSString stringWithFormat:@"%.2f %%", (progress * 100)]];
+            
+            [self layoutIfNeeded];
+        });
+    });
 }
 
 // 分子更新
@@ -252,15 +287,6 @@
     {
         [self setMessage:[infoValue objectForKey:@"message"]];
     }
-    [self setNeedsDisplay];
 }
-/*
-// Only override drawRect: if you perform custom drawing.
-// An empty implementation adversely affects performance during animation.
-- (void)drawRect:(CGRect)rect
-{
-    // Drawing code
-}
-*/
 
 @end
